@@ -1,0 +1,118 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+aside
+{
+    flex: 1.2;
+    position:fixed;
+    background-color: #102832;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 0.9em;
+    height: 95%;
+    width: 15%;
+}
+
+.field{
+    height: 25px;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.options, .statistiques, .presentation{
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.9em;
+    margin-left: 17%;
+}
+
+.presentation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1,h3{
+    text-align: center;
+}
+
+h2{
+    color: #102832;
+}
+
+.disconnect, .launch{
+    height: 25px;
+    background-clip: border-box;
+    border: 2px solid #E4E0D8;
+    border-radius: 5px;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+fieldset{
+    background-clip: border-box;
+    border: 2px solid #E4E0D8;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+    border: 3px solid #102832;
+}
+
+td{
+    border: 1px solid #102832;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 1280px)
+{
+
+    aside{
+        width: 25%;
+    }
+
+    .options, .statistiques, .presentation{
+        margin-left: 29%;
+    }
+
+
+}

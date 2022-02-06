@@ -56,10 +56,11 @@ public class RameurRessource {
         }
     }
 
+    //Méthode permettant de récupérer le type de la session d'un rameur selon son id
     @Path("/rameur")
     @GET
     @Produces("text/plain")
-    public String getRameur(String idRameur) {
+    public String getRameurSessionType(String idRameur) {
         //Variables
         int identifiantRameur;
         String type = "";
@@ -71,6 +72,7 @@ public class RameurRessource {
 
         return type;
     }
+
 
     @Path("/Hello")
     @GET

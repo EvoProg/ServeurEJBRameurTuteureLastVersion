@@ -42,35 +42,65 @@ public class RameurRessource {
     //Méthode permettant d'ajouter un rameur à la BD
     @Path("/ajoutRameur")
     @PUT
-    @Produces({"text/plain", "text/plain", "text/plain"})
-    public void addRameur(String idRameur, String type, String valeur){
+    @Produces("text/plain")
+    public void addRameur(String idRameur){
         //Variables
         int identifiantRameur, valeurRameur;
 
         //Vérification des variables passées en paramètres et traitement de la requête
-        if (idRameur != "" && valeur != ""){
+        if (idRameur != ""){
             identifiantRameur = Integer.parseInt(idRameur);
-            valeurRameur = Integer.parseInt(valeur);
 
-            sb.updateRameur(identifiantRameur,type,valeurRameur);
+            sb.updateRameur(identifiantRameur,"",0);
         }
     }
 
-    //Méthode permettant de récupérer le type de la session d'un rameur selon son id
-    @Path("/rameur")
+    //Méthode permettant de récupérer le type de la session d'un rameur
+    @Path("/type")
     @GET
     @Produces("text/plain")
-    public String getRameurSessionType(String idRameur) {
-        //Variables
-        int identifiantRameur;
+    public String getRameurSessionType() {
+        //Variable
         String type = "";
         //Vérification des variables passées en paramètres et traitement de la requête
-        if (idRameur != ""){
-            identifiantRameur = Integer.parseInt(idRameur);
-            type = sb.getRameur(identifiantRameur).getCourse();
-        }
+        while (type.equals("")){
+            Rameur rameur = sb.getRameur(1);
+            if(rameur != null)
+                type = rameur.getCourse();
 
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Sortie de la boucle getRameurSessionType");
+        System.out.println(type);
         return type;
+    }
+
+    //Méthode permettant de récupérer la valeur de la session d'un rameur
+    @Path("/valeur")
+    @GET
+    @Produces("text/plain")
+    public String getRameurSessionValeur() {
+        //Variable
+        String valeur = "";
+        //Vérification des variables passées en paramètres et traitement de la requête
+        while (valeur.equals("0")){
+            Rameur rameur = sb.getRameur(1);
+            if(rameur != null)
+                valeur = ""+rameur.getValeur();
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Sortie de la boucle getRameurSessionValeur");
+        System.out.println(valeur);
+        return valeur;
     }
 
 

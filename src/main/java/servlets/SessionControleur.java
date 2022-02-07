@@ -3,6 +3,7 @@ package servlets;
 import ejb.entities.Performance;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
+import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.*;
@@ -25,6 +26,9 @@ public class SessionControleur extends HttpServlet {
     //Appel de l'EJB depuis son interface
     @EJB
     private ManagerBeanLocal mg;
+
+    @EJB
+    private SessionBeanLocal sb;
 
     //Traitement de la requête HTTP Get.
     @Override
@@ -67,7 +71,20 @@ public class SessionControleur extends HttpServlet {
 
     //Methode confirmant les paramètres d'une session
     protected void confirmerSession(int identifiant, HttpServletRequest request, HttpServletResponse response){
+        //On récupère les données
+        String temps_s = request.getParameter("temps_s");
+        String distance_s = request.getParameter("distance_s");
 
+        //Vérification
+        if(temps_s != null){
+            //Session sur le temps
+            int tps = Integer.parseInt(temps_s);
+            sb.updateRameur(1,"temps",tps);
+        }else{
+            //Session sur la distance
+            int dist = Integer.parseInt(distance_s);
+            sb.updateRameur(1,"distance",dist);
+        }
     }
 
     //Méthode appellant l'EJB pour récupérer les dernières performances de l'utilisateur

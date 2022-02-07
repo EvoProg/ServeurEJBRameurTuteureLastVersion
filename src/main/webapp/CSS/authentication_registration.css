@@ -14,7 +14,7 @@ body{
 
 .connection{
     height: 25px;
-    width: 70%;
+    width: 90%;
     border-radius: 5px;
     border: 0;
     background-color: #c0001a;
@@ -65,7 +65,7 @@ label, button{
     align-self: flex-end;
     box-sizing: border-box;
     height: 25px;
-    width: 70%;
+    width: 90%;
 }
 
 h2{

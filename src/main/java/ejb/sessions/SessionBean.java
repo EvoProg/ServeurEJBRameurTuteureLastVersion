@@ -170,23 +170,13 @@ public class SessionBean implements SessionBeanLocal{
     @Override
     public int getDernierIdRameur() {
         List<Rameur> rameurs = null;
-        //On récupère la liste des performances de l'utilisateur
+        //On récupère la liste des rameurs
         rameurs = this.getListeRameurs();
 
         //On recherche le dernier id du rameur utilisé
         int idRameur = 0;
-        int index = 0;
-        for (int i = 0; i < rameurs.size(); i++) {
-            if(rameurs.get(i).getValeur() == 0) {
-                idRameur = rameurs.get(i).getId();
-            }else {
-                index++;
-            }
-        }
 
-        if(idRameur == 0){
-            idRameur = index;
-        }
+        idRameur = rameurs.size();
 
         return idRameur;
     }

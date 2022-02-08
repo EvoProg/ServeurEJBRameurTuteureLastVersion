@@ -1,6 +1,7 @@
 package servlets;
 
 import ejb.entities.Performance;
+import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
@@ -33,6 +34,20 @@ public class MenuControleur extends HttpServlet {
     //Traitement de la requête HTTP Get.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String identifiant = request.getParameter("identifiant");
+        int idUtilisateur = 0;
+
+        //On vérifie si la donnée identifiant n'est pas vide
+        if(identifiant.equals("")){
+            //Si celle-ci est vide, on renvoie vers la page d'index avec un message d'erreur
+            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
+            this.getServletContext().getRequestDispatcher("/");
+        }else{
+            //Sinon, on cast le paramètre identifiant en entier
+            idUtilisateur = Integer.parseInt(identifiant);
+        }
+
+        passageUtilisateur(idUtilisateur, request, response);
         this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request,response);
     }
 
@@ -57,6 +72,13 @@ public class MenuControleur extends HttpServlet {
 
         //Boolean de passage à la jsp pour afficher les entrées de paramètres pour l'utilisateur selon son choix
         Boolean session = true;
+
+        //On vérifie si des rameurs sont en attentes
+        List<Rameur> rameurs = sb.getListeRameursAttente(0);
+        if(rameurs.size() == 0) {
+            session = false;
+            request.setAttribute("Message","Aucun rameur de disponible, veuillez réessayer dans quelques minutes ... ");
+        }
 
         //On vérifie quelle option a été sélectionnée
         if(option.equals("temps")){

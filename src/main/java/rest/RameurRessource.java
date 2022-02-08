@@ -95,7 +95,7 @@ public class RameurRessource {
             if(rameur != null) {
                 val = rameur.getValeur();
             }
-            System.out.println("Je suis là ! : "+val);
+            //System.out.println("Je suis là ! : "+val);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

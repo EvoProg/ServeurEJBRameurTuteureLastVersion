@@ -4,7 +4,7 @@ body{
     font-weight: bolder;
 }
 
-aside
+.profil
 {
     flex: 1.2;
     position:fixed;

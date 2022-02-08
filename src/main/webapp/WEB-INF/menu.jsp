@@ -84,6 +84,13 @@
                 <legend>Session : </legend>
                 <form class="test" action="SessionControleur" method="post">
 
+                    <c:if test="${rameurs.size() != 0}">
+                        <c:forEach items="${rameurs}" var="rameur">
+                            <label for="rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
+                            <input type="radio" id="rameur${rameur.getId()}" name="rameur" value="rameur${rameur.getId()}" required>
+                        </c:forEach>
+                    </c:if>
+
                     <c:if test="${temps == true}">
                         <section class="field"></section>
                         <label class="temps_label">Temps (en secondes) : </label>
@@ -135,6 +142,8 @@
             </tbody>
         </table>
     </section>
+
+
 </div>
 
 </body>

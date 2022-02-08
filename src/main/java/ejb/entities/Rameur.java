@@ -11,7 +11,8 @@ import javax.persistence.*;
 /*Requête sur la table*/
 @NamedQueries({
         @NamedQuery(name = "rameurs", query = "select r from Rameur r"),  //Liste de touts les Rameurs
-        @NamedQuery(name = "rameur_id", query = "select r from Rameur r where r.id = :idRameur") //Rameur selon un identifiant
+        @NamedQuery(name = "rameur_id", query = "select r from Rameur r where r.id = :idRameur"), //Rameur selon un identifiant
+        @NamedQuery(name = "rameurs_valeur", query = "select r from Rameur r where r.valeur = :valeur") //Liste des rameurs selon leurs valeurs
 })
 @Table(name = "rameurs")
 public class Rameur {

@@ -14,6 +14,9 @@ public interface SessionBeanLocal {
     //Méthode permettant de récupérer tous les rameurs
     public List<Rameur> getListeRameurs();
 
+    //Méthode permettant de récupérer la liste des rameurs en attente
+    public List<Rameur> getListeRameursAttente(int valeur);
+
     //Méthode permettant de récupérer un rameur à partir d'un identifiant
     public Rameur getRameur(int idRameur);
 
@@ -22,4 +25,7 @@ public interface SessionBeanLocal {
 
     //Méthode permettant de mettre à jour le rameur dans la base de données
     public void updateRameur(int idRameur, String type, int valeur);
+
+    //Méthode permettant de renvoyer le dernier ID Rameur utilisé et de l'incrémenter
+    public int getDernierIdRameur();
 }

@@ -6,16 +6,18 @@ package ejb.sessions;
     de l'échange avec le client, l'instance de l'EJB est détruite et les données sont perdues.
  */
 
+import ejb.entities.Performance;
 import ejb.entities.Rameur;
 
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-@Stateful
+@Stateless
 public class SessionBean implements SessionBeanLocal{
     //Déclaration des variables
     //Variable correspondant à une unité de persistance définie dans le fichier persistence.xml
@@ -41,6 +43,24 @@ public class SessionBean implements SessionBeanLocal{
         }catch (Exception e){
             //Si les rameurs n'existent pas
             System.out.println("Erreur dans getListeRameurs connection BD : "+e.getMessage());
+        }
+
+        return rameurs;
+    }
+
+    //Méthode permettant de récupérer la liste des rameurs en attente
+    public List<Rameur> getListeRameursAttente(int valeur){
+        //Variable renvoyée
+        List<Rameur> rameurs = null;
+
+        //Récupération des rameurs depuis la BD
+        Query q = em.createNamedQuery("rameurs_valeur");
+        q.setParameter("valeur",valeur);
+        try{
+            rameurs = q.getResultList();
+        }catch (Exception e){
+            //Si les rameurs n'existent pas
+            System.out.println("Erreur dans getListeRameursAttente connection BD : "+e.getMessage());
         }
 
         return rameurs;
@@ -137,6 +157,31 @@ public class SessionBean implements SessionBeanLocal{
             addRameur(idRameur);
             updateRameur(idRameur, type, valeur);
         }
+    }
+
+    //Méthode permettant de renvoyer le dernier ID Rameur utilisé et de l'incrémenter
+    @Override
+    public int getDernierIdRameur() {
+        List<Rameur> rameurs = null;
+        //On récupère la liste des performances de l'utilisateur
+        rameurs = this.getListeRameurs();
+
+        //On recherche le dernier id du rameur utilisé
+        int idRameur = 0;
+        int index = 0;
+        for (int i = 0; i < rameurs.size(); i++) {
+            if(rameurs.get(i).getValeur() == 0) {
+                idRameur = rameurs.get(i).getId();
+            }else {
+                index++;
+            }
+        }
+
+        if(idRameur == 0){
+            idRameur = index;
+        }
+
+        return idRameur;
     }
 
 }

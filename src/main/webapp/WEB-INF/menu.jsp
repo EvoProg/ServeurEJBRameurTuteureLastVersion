@@ -87,7 +87,7 @@
                     <c:if test="${rameurs.size() != 0}">
                         <c:forEach items="${rameurs}" var="rameur">
                             <label for="rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
-                            <input type="radio" id="rameur${rameur.getId()}" name="rameur" value="rameur${rameur.getId()}" required>
+                            <input type="radio" id="rameur${rameur.getId()}" name="rameur" value="${rameur.getId()}" required>
                         </c:forEach>
                     </c:if>
 

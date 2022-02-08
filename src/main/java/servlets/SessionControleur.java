@@ -58,7 +58,7 @@ public class SessionControleur extends HttpServlet {
         //On vérifie quelle action a été sélectionnée
         if(action.equals("Confirmer")){
             //On met à jour les données
-            confirmerSession(idUtilisateur, request, response);
+            confirmerSession(request, response);
             //On affiche les dernières performances
             affichageDernierePerformance(idUtilisateur,request);
             //On passe l'utilisateur
@@ -70,20 +70,35 @@ public class SessionControleur extends HttpServlet {
     }
 
     //Methode confirmant les paramètres d'une session
-    protected void confirmerSession(int identifiant, HttpServletRequest request, HttpServletResponse response){
+    protected void confirmerSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //On récupère les données
         String temps_s = request.getParameter("temps_s");
         String distance_s = request.getParameter("distance_s");
+        String rameur = request.getParameter("rameur");
+
+        /*MAJ a venir, Sécurité pour les problèmes de concurrency entre deux rameurs*/
+
+        int id = 0;
+
+        if(rameur != "") {
+            id = Integer.parseInt(rameur);
+        }else{
+            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
+            //On renvoie vers la page de connexion
+            this.getServletContext().getRequestDispatcher("/").forward(request,response);
+        }
 
         //Vérification
         if(temps_s != null){
             //Session sur le temps
             int tps = Integer.parseInt(temps_s);
-            sb.updateRameur(1,"temps",tps);
+            //Vérification
+            sb.updateRameur(id,"temps",tps);
         }else{
             //Session sur la distance
             int dist = Integer.parseInt(distance_s);
-            sb.updateRameur(1,"distance",dist);
+            //Vérification
+            sb.updateRameur(id,"distance",dist);
         }
     }
 

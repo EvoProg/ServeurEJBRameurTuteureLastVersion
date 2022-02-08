@@ -3,6 +3,7 @@ package servlets;
 import ejb.entities.Performance;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
+import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.*;
@@ -25,6 +26,9 @@ public class MenuControleur extends HttpServlet {
     //Appel de l'EJB depuis son interface
     @EJB
     private ManagerBeanLocal mg;
+
+    @EJB
+    private SessionBeanLocal sb;
 
     //Traitement de la requête HTTP Get.
     @Override
@@ -57,8 +61,10 @@ public class MenuControleur extends HttpServlet {
         //On vérifie quelle option a été sélectionnée
         if(option.equals("temps")){
             request.setAttribute("temps",session);
+            request.setAttribute("rameurs",sb.getListeRameursAttente(0));
         }else{
             request.setAttribute("distance",session);
+            request.setAttribute("rameurs",sb.getListeRameursAttente(0));
         }
 
         //On set les variables à renvoyées à la jsp

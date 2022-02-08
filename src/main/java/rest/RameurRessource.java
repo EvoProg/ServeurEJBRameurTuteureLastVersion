@@ -24,20 +24,16 @@ public class RameurRessource {
     @EJB
     private SessionBeanLocal sb;
 
-/*
-    private int identifiantRameur;
-
     //Méthode permettant de set l'identifiant d'un rameur
-    @Path("/identifiantRameur")
-    @PUT
+    @Path("/identifiant")
+    @GET
     @Produces("text/plain")
-    public void setIdentifiantRameur(String idRameur){
-        if(idRameur != "")
-            this.identifiantRameur = Integer.parseInt(idRameur);
-        else
-            identifiantRameur = 0;
+    public String getIdentifiantRameur(){
+        String identifiant = "";
+        int id = sb.getDernierIdRameur();
+        identifiant += id;
+        return identifiant;
     }
-*/
 
     //Méthode permettant d'ajouter un rameur à la BD
     @Path("/ajoutRameur")
@@ -57,14 +53,16 @@ public class RameurRessource {
 
     //Méthode permettant de récupérer le type de la session d'un rameur
     @Path("/type")
-    @GET
+    @PUT
     @Produces("text/plain")
-    public String getRameurSessionType() {
-        //Variable
+    public String getRameurSessionType(String idRameur) {
+        //Variables
+        int identifiantRameur = Integer.parseInt(idRameur);;
         String type = "";
+
         //Vérification des variables passées en paramètres et traitement de la requête
         while (type.equals("")){
-            Rameur rameur = sb.getRameur(1);
+            Rameur rameur = sb.getRameur(identifiantRameur);
             if(rameur != null)
                 type = rameur.getCourse();
 
@@ -81,14 +79,15 @@ public class RameurRessource {
 
     //Méthode permettant de récupérer la valeur de la session d'un rameur
     @Path("/valeur")
-    @GET
+    @PUT
     @Produces("text/plain")
-    public String getRameurSessionValeur() {
-        //Variable
+    public String getRameurSessionValeur(String idRameur) {
+        //Variables
         String valeur = "";
+        int identifiantRameur = Integer.parseInt(idRameur);;
         //Vérification des variables passées en paramètres et traitement de la requête
         while (valeur.equals("0")){
-            Rameur rameur = sb.getRameur(1);
+            Rameur rameur = sb.getRameur(identifiantRameur);
             if(rameur != null)
                 valeur = ""+rameur.getValeur();
 

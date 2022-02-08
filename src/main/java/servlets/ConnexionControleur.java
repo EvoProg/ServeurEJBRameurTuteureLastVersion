@@ -46,7 +46,10 @@ public class ConnexionControleur extends HttpServlet {
             Utilisateur utilisateur = cb.getUtilisateur(pseudo);
 
             //On passe l'utilisateur dans les paramètres de la page appelée
-            request.setAttribute("Utilisateur",utilisateur);
+            //request.setAttribute("Utilisateur",utilisateur);
+            HttpSession session = request.getSession();
+            session.setAttribute("Utilisateur", utilisateur);
+            request.setAttribute("menu", true);
 
             //On appelle la nouvelle page
             this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);

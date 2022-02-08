@@ -69,7 +69,7 @@ public class RameurRessource {
                 type = rameur.getCourse();
 
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -86,19 +86,25 @@ public class RameurRessource {
     public String getRameurSessionValeur(String idRameur) {
         //Variables
         String valeur = "";
-        int identifiantRameur = Integer.parseInt(idRameur);;
+        int identifiantRameur = Integer.parseInt(idRameur);
+        System.out.println(identifiantRameur);
+        int val = 0;
         //Vérification des variables passées en paramètres et traitement de la requête
-        while (valeur.equals("0")){
+        while (val == 0){
             Rameur rameur = sb.getRameur(identifiantRameur);
-            if(rameur != null)
-                valeur = ""+rameur.getValeur();
-
+            if(rameur != null) {
+                val = rameur.getValeur();
+            }
+            System.out.println("Je suis là ! : "+val);
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+        valeur = "" + val;
+
         System.out.println("Sortie de la boucle getRameurSessionValeur");
         System.out.println(valeur);
         return valeur;

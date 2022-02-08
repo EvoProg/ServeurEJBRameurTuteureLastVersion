@@ -76,7 +76,7 @@ public class SessionControleur extends HttpServlet {
         String distance_s = request.getParameter("distance_s");
         String rameur = request.getParameter("rameur");
 
-        /*MAJ a venir, Sécurité pour les problèmes de concurrency entre deux rameurs*/
+        /*MAJ avenir, Sécurité pour les problèmes de concurrency entre deux rameurs*/
 
         int id = 0;
 

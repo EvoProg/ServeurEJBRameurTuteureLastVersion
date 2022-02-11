@@ -17,43 +17,10 @@
 </head>
 
 <body>
-    <!-- Partie Profil -->
-    <div class="profil">
-        <aside>
-            <section class="field"></section>
-
-            <h1>Profil</h1>
-
-            <hr>
-
-            <h3 style="color: white">Bonjour ${Utilisateur.getLogin()}</h3>
-
-            <hr>
-
-            <!-- Menu -->
-
-            <ul>
-                <li><a href="MenuControleur">Les dernières sessions</a></li>
-                <li><a href="MenuControleur">Mes statistiques</a></li>
-                <li><a href="MenuControleur">Effectuer une course</a></li>
-                <li><a href="MenuControleur">Effectuer un entraînement</a></li>
-            </ul>
-
-
-            <input type="hidden" name="identifiant" value="${Utilisateur.getId()}">
-        </aside>
-    </div>
+    <%@include file="navigation.jsp" %>
 
 <div class="menu">
-    <section class="presentation">
-        <h2>Rameurs Connectés - Menu</h2>
-
-        <!-- Partie déconnexion -->
-        <form method="get" action="ConnexionControleur">
-            <input type="submit" value="Déconnexion" name="action">
-        </form>
-
-    </section>
+    <%@include file="deconnexion.jsp"%>
 
     <section class="field"></section>
 

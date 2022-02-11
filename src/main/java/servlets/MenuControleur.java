@@ -1,6 +1,7 @@
 package servlets;
 
 import ejb.entities.Performance;
+import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
@@ -60,6 +61,13 @@ public class MenuControleur extends HttpServlet {
 
         //Boolean de passage à la jsp pour afficher les entrées de paramètres pour l'utilisateur selon son choix
         Boolean session = true;
+
+        //On vérifie si des rameurs sont en attentes
+        List<Rameur> rameurs = sb.getListeRameursAttente(0);
+        if(rameurs.size() == 0) {
+            session = false;
+            request.setAttribute("Message","Aucun rameur de disponible, veuillez réessayer dans quelques minutes ... ");
+        }
 
         //On vérifie quelle option a été sélectionnée
         if(option.equals("temps")){

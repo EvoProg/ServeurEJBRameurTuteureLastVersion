@@ -44,9 +44,11 @@
             </div>
         </form>
 
+        <p class="message">${Message}</p>
+
         <section class="field"></section>
 
-        <c:if test="${temps == true || distance == true}">
+        <c:if test="${(temps == true || distance == true)}">
             <fieldset>
                 <legend>Session : </legend>
                 <form class="test" action="SessionControleur" method="post">
@@ -64,8 +66,6 @@
                         <input type="number" name="temps_s" id="temps_s" class="temps-txt-field" required min="60" max="1800">
                         <br>
                     </c:if>
-
-
 
                     <c:if test="${distance == true}">
                         <section class="field"></section>

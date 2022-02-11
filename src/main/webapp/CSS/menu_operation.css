@@ -18,6 +18,13 @@ body{
     width: 15%;
 }
 
+.message{
+    color: #c0001a;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: bolder;
+}
+
 .field{
     height: 25px;
 }
@@ -112,6 +119,15 @@ li a:hover {
 
     .options, .statistiques, .presentation{
         margin-left: 29%;
+    }
+
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        border-radius: 5px;
     }
 
 

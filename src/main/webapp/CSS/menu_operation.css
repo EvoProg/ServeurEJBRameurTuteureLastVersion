@@ -146,6 +146,15 @@ li a:hover {
     height: auto;
 }
 
+.inputrameur:hover{
+    background-color: #555;
+    color: white;
+}
+
+.inputrameur{
+    color: black;
+}
+
 @media screen and (max-width: 1280px)
 {
 

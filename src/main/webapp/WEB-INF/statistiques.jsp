@@ -50,6 +50,26 @@
             <section class="boxcolonne">
                 <p>test</p>
             </section>
+        </div>
+
+<br>
+<div class="container">
+    <section class="boxcolonne">
+        <p>test</p>
+    </section>
+    <section class="boxcolonne">
+        <p>test</p>
+    </section>
+</div>
+
+<br>
+<div class="container">
+    <section class="boxcolonne">
+        <p>test</p>
+    </section>
+    <section class="boxcolonne">
+        <p>test</p>
+    </section>
 </div>
 
 </body>

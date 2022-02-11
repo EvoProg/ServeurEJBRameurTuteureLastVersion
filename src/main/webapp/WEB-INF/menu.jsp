@@ -68,9 +68,9 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${rameurs}" var="rameur">
-                                        <tr>
+                                        <tr class="inputrameur">
                                             <td><input type="radio" id="rameur${rameur.getId()}" name="rameur" value="${rameur.getId()}" required></td>
-                                            <td>${rameur.getId()}</td>
+                                            <td><label for="rameur${rameur.getId()}">${rameur.getId()}</label> </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

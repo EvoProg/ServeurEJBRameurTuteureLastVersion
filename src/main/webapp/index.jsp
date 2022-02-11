@@ -55,6 +55,7 @@
 
                     <hr>
 
+                    <!--Permet l'affichage de messages d'erreur-->
                     <div>
                         <p class="message">${Message}</p>
                         <br>

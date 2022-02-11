@@ -17,10 +17,14 @@
 </head>
 
 <body>
+    <!--Affichage de la barre de navigation sur la gauche de la page-->
     <%@include file="navigation.jsp" %>
 
-<div class="menu">
+    <!--Affichage du nom de la page ainsi que du bouton de déconnexion-->
     <%@include file="deconnexion.jsp"%>
+
+<div class="menu">
+
 
     <section class="field"></section>
 
@@ -44,6 +48,7 @@
             </div>
         </form>
 
+        <!--Affichage des messages d'erreur-->
         <p class="message">${Message}</p>
 
         <section class="field"></section>
@@ -113,11 +118,15 @@
                 </form>
             </fieldset>
         </c:if>
-
     </section>
+
+
 
     <section class="field"></section>
 
+
+
+    <!--Affichage des stats de la dernière session-->
     <section class="statistiques">
         <h3>Performances Globales de la dernière session</h3>
         <hr>

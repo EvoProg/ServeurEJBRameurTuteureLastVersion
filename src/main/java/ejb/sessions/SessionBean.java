@@ -132,7 +132,7 @@ public class SessionBean implements SessionBeanLocal{
 
     //Méthode permettant de mettre à jour le rameur dans la base de données selon son id
     @Override
-    public void updateRameur(int idRameur, String type, int valeur) {
+    public void updateRameur(int idRameur, String type, int valeur, int idutil, int session) {
         //On vérifie si le rameur est présent dans la BD
         Rameur rameur = getRameur(idRameur);
 
@@ -143,6 +143,8 @@ public class SessionBean implements SessionBeanLocal{
             //On met à jour les données
             rameur.setCourse(type);
             rameur.setValeur(valeur);
+            rameur.setIdUtil(idutil);
+            rameur.setIdSession(session);
 
             //On remet le rameur dans la BD
             //Transaction à la BD
@@ -162,7 +164,7 @@ public class SessionBean implements SessionBeanLocal{
         }else{
             //Si le rameur n'est pas présent, on l'ajoute à la BD puis on rappelle la fonction
             addRameur(idRameur);
-            updateRameur(idRameur, type, valeur);
+            updateRameur(idRameur, type, valeur,idutil,session);
         }
     }
 
@@ -176,7 +178,8 @@ public class SessionBean implements SessionBeanLocal{
         //On recherche le dernier id du rameur utilisé
         int idRameur = 0;
 
-        idRameur = rameurs.size();
+        if(rameurs.size() != 0)
+            idRameur = rameurs.size();
 
         return idRameur;
     }

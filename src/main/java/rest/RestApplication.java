@@ -9,6 +9,7 @@ import javax.ws.rs.core.Application;
     /ServeurEJBRameurTutore-1.0-SNAPSHOT/rest
  */
 
+
 @ApplicationPath("/rest")
 public class RestApplication extends Application {
 }

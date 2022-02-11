@@ -27,6 +27,28 @@ public class Rameur {
     @Column(name = "valeur")
     private Integer valeur;
 
+    @Column(name="idutil")
+    private Integer idUtil;
+
+    @Column(name="idsession")
+    private Integer idSession;
+
+    public Integer getIdUtil() {
+        return idUtil;
+    }
+
+    public void setIdUtil(Integer idUtil) {
+        this.idUtil = idUtil;
+    }
+
+    public Integer getIdSession() {
+        return idSession;
+    }
+
+    public void setIdSession(Integer idSession) {
+        this.idSession = idSession;
+    }
+
     //Accesseurs en écriture et en lecture
     public Integer getValeur() {
         return valeur;

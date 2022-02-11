@@ -10,13 +10,12 @@ package rest;
 
 import ejb.entities.Rameur;
 import ejb.sessions.SessionBeanLocal;
+import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Stateless
 @Path("/ressource")
@@ -34,6 +33,7 @@ public class RameurRessource {
         String identifiant = "";
         int id = sb.getDernierIdRameur();
         identifiant += id;
+        System.out.println(identifiant);
         return identifiant;
     }
 
@@ -49,7 +49,7 @@ public class RameurRessource {
         if (idRameur != ""){
             identifiantRameur = Integer.parseInt(idRameur);
 
-            sb.updateRameur(identifiantRameur,"",0);
+            sb.updateRameur(identifiantRameur,"",0,0,0);
         }
     }
 
@@ -109,13 +109,4 @@ public class RameurRessource {
         System.out.println(valeur);
         return valeur;
     }
-
-
-    @Path("/Hello")
-    @GET
-    @Produces("text/plain")
-    public String helloWorld(){
-        return "Hello World";
-    }
-
 }

@@ -27,7 +27,7 @@ public class PerformanceId implements Serializable {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(int timestamp) {
         this.timestamp = timestamp;
     }
 

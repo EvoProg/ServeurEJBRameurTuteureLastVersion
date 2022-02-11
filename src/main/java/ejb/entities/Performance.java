@@ -23,6 +23,9 @@ public class Performance implements Serializable {
     @EmbeddedId
     private PerformanceId id;
 
+    @Column(name="idRameur")
+    private Integer idRameur;
+
     @Column(name = "temps_cs")
     private Integer tempsCs;
 
@@ -54,6 +57,14 @@ public class Performance implements Serializable {
 
     public void setFrequenceBpm(Integer frequenceBpm) {
         this.frequenceBpm = frequenceBpm;
+    }
+
+    public Integer getIdRameur() {
+        return idRameur;
+    }
+
+    public void setIdRameur(Integer idRameur) {
+        this.idRameur = idRameur;
     }
 
     public Integer getCalories() {

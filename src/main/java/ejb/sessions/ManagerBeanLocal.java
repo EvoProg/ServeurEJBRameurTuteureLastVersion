@@ -26,6 +26,5 @@ public interface ManagerBeanLocal {
     public int getDerniereSession(int idUtil);
 
     //Méthode ajoutant les valeurs dans la base de données
-    public void addPerformances(int temps, int distance, int coups, int rythme, int caloriesH, int calories,
-                                int frequence, int idUtil, int idSession);
+    public void addPerformances(Performance p);
 }

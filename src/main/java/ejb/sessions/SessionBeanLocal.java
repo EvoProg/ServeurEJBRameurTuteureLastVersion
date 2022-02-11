@@ -24,7 +24,7 @@ public interface SessionBeanLocal {
     public boolean addRameur(int idRameur);
 
     //Méthode permettant de mettre à jour le rameur dans la base de données
-    public void updateRameur(int idRameur, String type, int valeur);
+    public void updateRameur(int idRameur, String type, int valeur, int idutil, int session);
 
     //Méthode permettant de renvoyer le dernier ID Rameur utilisé et de l'incrémenter
     public int getDernierIdRameur();

@@ -2,6 +2,7 @@ package ejb.sessions;
 
 import ejb.entities.Performance;
 import ejb.entities.PerformanceId;
+import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 
 import javax.ejb.Stateful;
@@ -181,39 +182,44 @@ public class ManagerBean implements ManagerBeanLocal{
 
     //Méthode ajoutant une performance et ses valeurs dans la BD
     @Override
-    public void addPerformances(int temps, int distance, int coups, int rythme, int caloriesH, int calories, int frequence, int idUtil, int idSession) {
+    public void addPerformances(Performance p) {
         //On crée une variable Performance
-        Performance performance = new Performance();
         //Et son Id
+        //Performance performance = new Performance();
         PerformanceId performanceId = new PerformanceId();
 
         //Variable de temps
-        long timer = System.currentTimeMillis();
+        int timer = (int)System.currentTimeMillis();
 
         //On ajoute les valeurs dans les classes
         //Id
-        performanceId.setTimestamp(timer);
-        performanceId.setIdSession(idSession);
-        performanceId.setIdUtil(idUtil);
+        Integer idRameur = p.getIdRameur();
+        Rameur rameur = null;
 
-        //Performance
-        performance.setTempsCs(temps);
-        performance.setDistanceCm(distance);
-        performance.setCoupsPm(coups);
-        performance.setRythmeMs(rythme);
-        performance.setCaloriesH(caloriesH);
-        performance.setCalories(calories);
-        performance.setFrequenceBpm(frequence);
+        //Récupération du rameur selon un Id depuis la BD
+        Query q = em.createNamedQuery("rameur_id");
+        q.setParameter("idRameur",idRameur);
+
+        try{
+            rameur = (Rameur) q.getSingleResult();
+        }catch (Exception e){
+            //Si le rameur n'existe pas
+            System.out.println("Erreur dans getRameur connection BD : "+e.getMessage());
+        }
+        performanceId.setTimestamp(timer);
+        performanceId.setIdSession(rameur.getIdSession());
+        performanceId.setIdUtil(rameur.getIdUtil());
 
         //On ajoute l'Id à la performance
-        performance.setId(performanceId);
+        //performance.setId(performanceId);
+        p.setId(performanceId);
 
         //On ajoute les données dans la BD
         em.getTransaction().begin();
 
         boolean transactionOk = false;
         try{
-            em.persist(performance);
+            em.persist(p);
             transactionOk = true;
             //Si l'ajout a bien eu lieu
         }finally {

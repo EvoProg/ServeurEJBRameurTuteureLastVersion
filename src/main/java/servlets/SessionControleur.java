@@ -58,7 +58,7 @@ public class SessionControleur extends HttpServlet {
         //On vérifie quelle action a été sélectionnée
         if(action.equals("Confirmer")){
             //On met à jour les données
-            confirmerSession(request, response);
+            confirmerSession(idUtilisateur,request, response);
             //On affiche les dernières performances
             affichageDernierePerformance(idUtilisateur,request);
             //On passe l'utilisateur
@@ -70,7 +70,7 @@ public class SessionControleur extends HttpServlet {
     }
 
     //Methode confirmant les paramètres d'une session
-    protected void confirmerSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void confirmerSession(int identifiant, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //On récupère les données
         String temps_s = request.getParameter("temps_s");
         String distance_s = request.getParameter("distance_s");
@@ -88,17 +88,21 @@ public class SessionControleur extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/").forward(request,response);
         }
 
+        //On récupère la dernière session de l'utilisateur
+        int session = mg.getDerniereSession(identifiant);
+
+        System.out.println(identifiant);
         //Vérification
         if(temps_s != null){
             //Session sur le temps
             int tps = Integer.parseInt(temps_s);
             //Vérification
-            sb.updateRameur(id,"temps",tps);
+            sb.updateRameur(id,"temps",tps,identifiant,session);
         }else{
             //Session sur la distance
             int dist = Integer.parseInt(distance_s);
             //Vérification
-            sb.updateRameur(id,"distance",dist);
+            sb.updateRameur(id,"distance",dist,identifiant,session);
         }
     }
 

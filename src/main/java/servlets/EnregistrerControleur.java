@@ -38,7 +38,7 @@ public class EnregistrerControleur extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/").forward(request, response);
         }else{
             //Sinon on renvoie vers la page en cours.
-            request.setAttribute("Message","Pseudos déjà utilisé, veuillez changer !");
+            request.setAttribute("Message","Pseudo déjà utilisé, veuillez changer !");
             this.getServletContext().getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
         }
     }

@@ -22,8 +22,6 @@
 
         <%@include file="deconnexion.jsp"%>
 
-
-
     </body>
 </html>
 

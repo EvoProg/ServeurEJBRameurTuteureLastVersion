@@ -1,13 +1,16 @@
 package servlets;
 
+import ejb.entities.Performance;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ConnectionBeanLocal;
+import ejb.sessions.ManagerBeanLocal;
 
 import javax.ejb.EJB;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 /*
     Une servlet est un composant Web de Java EE.
@@ -21,6 +24,9 @@ import java.io.IOException;
 public class ConnexionControleur extends HttpServlet {
     //Déclaration des variables
     //Appel de l'EJB depuis son interface
+    @EJB
+    private ManagerBeanLocal mg;
+
     @EJB
     private ConnectionBeanLocal cb;
 
@@ -51,9 +57,22 @@ public class ConnexionControleur extends HttpServlet {
             session.setAttribute("Utilisateur", utilisateur);
             request.setAttribute("menu", true);
 
+            //On passe les données des dernières performances
+            affichageDernierePerformance(utilisateur.getId(), request);
+
             //On appelle la nouvelle page
             this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);
             //System.out.println("CONNEXION RÉUSSIE");
         }
+    }
+
+    //Méthode appellant l'EJB pour récupérer les dernières performances de l'utilisateur
+    // et faire passer les données dans la jsp
+    protected void affichageDernierePerformance(int identifiant, HttpServletRequest request){
+        //On récupère les données
+        List<Performance> performances = mg.getListeDernieresPerformances(identifiant);
+
+        //On les passe dans les paramètres de la jsp
+        request.setAttribute("DernieresPerformances",performances);
     }
 }

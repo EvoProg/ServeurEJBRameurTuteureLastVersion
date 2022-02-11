@@ -121,27 +121,37 @@
     <section class="statistiques">
         <h3>Performances Globales de la dernière session</h3>
         <hr>
-        <table>
-            <thead>
-            <tr>
-                <th>ID_Session</th>
-                <th>Temps</th>
-                <th>Distance</th>
-                <th>Coups</th>
-                <th>Puissance</th>
-                <th>Rythme</th>
-                <th>Calories</th>
-                <th>Frequence</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <div class="cadre_table_scroll">
+            <table class="table_scroll">
+                <thead>
+                    <tr>
+                        <th>Numéro de la session</th>
+                        <th>Temps en seconde</th>
+                        <th>Distance en centimètre</th>
+                        <th>Coups par minute</th>
+                        <th>Puissance en watt</th>
+                        <th>Rythme</th>
+                        <th>Calories perdues</th>
+                        <th>Frequence en btmp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:if test="${DernieresPerformances.size() != 0}">
+                        <c:forEach items="${DernieresPerformances}" var="perf">
+                            <td>${perf.getId().getIdSession()}</td>
+                            <td>${perf.getId().getTimestamp()}</td>
+                            <td>${perf.getDistanceCm()}</td>
+                            <td>${perf.getCoupsPm()}</td>
+                            <td>${perf.getPuissanceW()}</td>
+                            <td>${perf.getRythmeMs()}</td>
+                            <td>${perf.getCalories()}</td>
+                            <td>${perf.getFrequenceBpm()}</td>
+                        </c:forEach>
+                    </c:if>
+                </tbody>
+            </table>
+        </div>
     </section>
-
-
-</div>
 
 </body>
 </html>

@@ -110,6 +110,40 @@ li a:hover {
     border-radius: 5px;
 }
 
+.cadre_table_scroll{
+    display: inline-block;
+    height: 8em;
+    overflow-y: scroll;
+    width: 100%;
+    margin:0 auto;
+    border: 1px solid #ccc;
+}
+
+.table_scroll thead th{
+    position: sticky;
+    top: 0;
+}
+
+.table_scroll tfoot td{
+    position: sticky;
+    top: 0;
+}
+
+.table_scroll{
+    text-align: center;
+    width: 100%;
+    font-size: 85%;
+    font-family:Arial,sans-serif;
+}
+
+.table_scroll th{
+    background: #ccc;
+}
+
+.table_scroll tfoot{
+    background: #ccc;
+}
+
 @media screen and (max-width: 1280px)
 {
 

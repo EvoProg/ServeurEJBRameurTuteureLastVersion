@@ -64,6 +64,7 @@ public class SessionControleur extends HttpServlet {
             //On passe l'utilisateur
             passageUtilisateur(idUtilisateur, request, response);
 
+            request.setAttribute("menu",true);
             //On renvoie vers la jsp menu
             this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);
         }

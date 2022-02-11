@@ -48,30 +48,60 @@
 
         <section class="field"></section>
 
+        <!-- Sélection du rameur et de la valeur de la session -->
         <c:if test="${(temps == true || distance == true)}">
             <fieldset>
-                <legend>Session : </legend>
+                <legend>Session</legend>
                 <form class="test" action="SessionControleur" method="post">
 
+                    <!-- Tableau Rameurs -->
                     <c:if test="${rameurs.size() != 0}">
-                        <c:forEach items="${rameurs}" var="rameur">
-                            <label for="rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
-                            <input type="radio" id="rameur${rameur.getId()}" name="rameur" value="${rameur.getId()}" required>
-                        </c:forEach>
+                        <fieldset>
+                            <legend>Choisissez votre rameur :</legend>
+                            <div class="cadre_table_scroll">
+                                <table class="table_scroll">
+                                    <thead>
+                                    <tr>
+                                        <th>Selection</th>
+                                        <th>Numéro du rameur</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${rameurs}" var="rameur">
+                                        <tr>
+                                            <td><input type="radio" id="rameur${rameur.getId()}" name="rameur" value="${rameur.getId()}" required></td>
+                                            <td>${rameur.getId()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </fieldset>
                     </c:if>
 
                     <c:if test="${temps == true}">
-                        <section class="field"></section>
-                        <label class="temps_label">Temps (en secondes) : </label>
-                        <input type="number" name="temps_s" id="temps_s" class="temps-txt-field" required min="60" max="1800">
-                        <br>
+                        <fieldset>
+                            <legend>Entrer une valeur :</legend>
+                            <section class="field"></section>
+                            <label class="temps_label">Temps (en secondes) : </label>
+                            <input type="number" name="temps_s" id="temps_s" class="temps-txt-field" required min="60" max="1800">
+                            <br>
+                        </fieldset>
                     </c:if>
 
                     <c:if test="${distance == true}">
-                        <section class="field"></section>
-                        <label class="distance_label">Distance (en mètres) : </label>
-                        <input type="number"  name="distance_s" id="distance_s" class="distance-txt-field" required min="100" max="4000">
-                        <br>
+                        <fieldset>
+                            <legend>Entrer une valeur :</legend>
+                            <section class="field"></section>
+                            <label class="distance_label">Distance (en mètres) : </label>
+                            <input type="number"  name="distance_s" id="distance_s" class="distance-txt-field" required min="100" max="4000">
+                            <br>
+                        </fieldset>
                     </c:if>
 
                     <section class="field"></section>

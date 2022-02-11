@@ -82,6 +82,7 @@ public class MenuControleur extends HttpServlet {
         /*affichageDernierePerformance(idUtilisateur, request);
         passageUtilisateur(idUtilisateur, request, response);*/
 
+        request.setAttribute("menu",true);
         //On renvoie ensuite vers la page avec les nouvelles données
         this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);
     }

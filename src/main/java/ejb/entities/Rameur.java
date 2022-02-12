@@ -1,6 +1,7 @@
 package ejb.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /*
     EJB permettent de représenter et de gérer des données enregistrées dans une base de données.
@@ -15,7 +16,7 @@ import javax.persistence.*;
         @NamedQuery(name = "rameurs_valeur", query = "select r from Rameur r where r.valeur = :valeur") //Liste des rameurs selon leurs valeurs
 })
 @Table(name = "rameurs")
-public class Rameur {
+public class Rameur implements Serializable {
     //Déclaration des variables (Spécification des colonnes des tables)
     @Id
     @Column(name = "id", nullable = false)

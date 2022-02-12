@@ -18,59 +18,39 @@
 
 <body>
 
-<%@include file="navigation.jsp"%>
+    <%@include file="navigation.jsp"%>
 
-<%@include file="deconnexion.jsp"%>
+    <%@include file="deconnexion.jsp"%>
 
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>test</p>
+                <p>distances_globales</p>
             </section>
             <section class="boxcolonne">
-                <p>test</p>
+                <p>coups_globales</p>
             </section>
         </div>
 
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>test</p>
+                <p>puissances_globales</p>
             </section>
             <section class="boxcolonne">
-                <p>test</p>
+                <p>rythmes_globales</p>
             </section>
         </div>
 
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>test</p>
+                <p>calories_perdues</p>
             </section>
             <section class="boxcolonne">
-                <p>test</p>
+                <p>frequences_globales</p>
             </section>
         </div>
-
-<br>
-<div class="container">
-    <section class="boxcolonne">
-        <p>test</p>
-    </section>
-    <section class="boxcolonne">
-        <p>test</p>
-    </section>
-</div>
-
-<br>
-<div class="container">
-    <section class="boxcolonne">
-        <p>test</p>
-    </section>
-    <section class="boxcolonne">
-        <p>test</p>
-    </section>
-</div>
 
 </body>
 </html>

@@ -5,8 +5,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "StatsServlet", value = "/statistiques")
-public class StatsServlet extends HttpServlet {
+@WebServlet(name = "StatsControleur", value = "/StatsControleur")
+public class StatsControleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("stats", true);

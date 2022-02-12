@@ -5,14 +5,17 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "EntrainementServlet", value = "/entrainement")
-public class EntrainementServlet extends HttpServlet {
+@WebServlet(name = "DeconnexionControleur", value = "/DeconnexionControleur")
+public class DeconnexionControleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("entrainement", true);
+        HttpSession session = request.getSession();
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/entrainement.jsp").forward(request, response);
+        //On détruit la session en court
+        session.invalidate();
+
+        this.getServletContext().getRequestDispatcher("/").forward(request, response);
     }
 
     @Override

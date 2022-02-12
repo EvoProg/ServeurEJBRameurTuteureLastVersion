@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CourseServlet", value = "/course")
-public class CourseServlet extends HttpServlet
+@WebServlet(name = "CourseControleur", value = "/CourseControleur")
+public class CourseControleur extends HttpServlet
 {
     @EJB
     private SessionBeanLocal sb;

@@ -30,9 +30,9 @@
 
         <ul>
             <li><a href="MenuControleur">Accueil</a></li>
-            <li><a href="statistiques">Mes statistiques</a></li>
-            <li><a href="course">Effectuer une course</a></li>
-            <li><a href="entrainement">Effectuer un entraînement</a></li>
+            <li><a href="StatsControleur">Mes statistiques</a></li>
+            <li><a href="CourseControleur">Effectuer une course</a></li>
+            <li><a href="EntrainementControleur">Effectuer un entraînement</a></li>
         </ul>
     </aside>
 </div>

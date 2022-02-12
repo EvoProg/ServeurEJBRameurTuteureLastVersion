@@ -19,7 +19,7 @@
 
 
     <!-- Partie déconnexion -->
-    <form method="get" action="logout">
+    <form method="get" action="DeconnexionControleur">
         <input type="submit" value="Déconnexion" name="action">
     </form>
 

@@ -177,7 +177,7 @@ public class ManagerBean implements ManagerBeanLocal{
                 idSession = performances.get(i).getId().getIdSession();
         }
 
-        return idSession;
+        return idSession+1;
     }
 
     //Méthode ajoutant une performance et ses valeurs dans la BD

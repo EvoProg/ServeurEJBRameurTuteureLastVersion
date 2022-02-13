@@ -33,6 +33,7 @@ public class SessionControleur extends HttpServlet {
     //Traitement de la requête HTTP Get.
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         this.getServletContext().getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);
     }
 
@@ -41,28 +42,17 @@ public class SessionControleur extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //On récupère les données de la jsp "menu" dans le formulaire post
         String action = request.getParameter("action");
-        String identifiant = request.getParameter("identifiant");
-
-        int idUtilisateur = 0;
-
-        //On vérifie si la donnée identifiant n'est pas vide
-        if(identifiant.equals("")){
-            //Si celle-ci est vide, on renvoie vers la page d'index avec un message d'erreur
-            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
-            this.getServletContext().getRequestDispatcher("/");
-        }else{
-            //Sinon, on cast le paramètre identifiant en entier
-            idUtilisateur = Integer.parseInt(identifiant);
-        }
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
+        int identifiant = utilisateur.getId();
 
         //On vérifie quelle action a été sélectionnée
         if(action.equals("Confirmer")){
             //On met à jour les données
-            confirmerSession(idUtilisateur,request, response);
+            confirmerSession(identifiant,request, response);
             //On affiche les dernières performances
-            affichageDernierePerformance(idUtilisateur,request);
+            affichageDernierePerformance(identifiant,request);
             //On passe l'utilisateur
-            passageUtilisateur(idUtilisateur, request, response);
+            //passageUtilisateur(identifiant, request, response);
 
             request.setAttribute("menu",true);
             //On renvoie vers la jsp menu
@@ -90,9 +80,10 @@ public class SessionControleur extends HttpServlet {
         }
 
         //On récupère la dernière session de l'utilisateur
-        int session = mg.getDerniereSession(identifiant);
+        int session = mg.getDerniereSession(identifiant)+1;
 
-        System.out.println("Identifiant de l'utilisateur : " + identifiant);
+        //System.out.println("Identifiant de l'utilisateur : " + identifiant);
+        //System.out.println("Session de l'utilisateur : " + session);
 
         //Vérification
         if(temps_s != null){
@@ -116,22 +107,5 @@ public class SessionControleur extends HttpServlet {
 
         //On les passe dans les paramètres de la jsp
         request.setAttribute("DernieresPerformances",performances);
-    }
-
-    //Méthode appellant l'EJB pour récupérer l'utilisateur actuel
-    // et faire passer les données dans la jsp
-    protected void passageUtilisateur(int identifiant, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //On récupère les données
-        Utilisateur utilisateur = mg.getUtilisateur(identifiant);
-
-        //On met en place une sécurité pour savoir si l'utilisateur n'a pas été trouvé
-        if (utilisateur == null){
-            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
-            //On renvoie vers la page de connexion
-            this.getServletContext().getRequestDispatcher("/").forward(request,response);
-        }else{
-            //Sinon on passe les données dans la jsp
-            request.setAttribute("Utilisateur",utilisateur);
-        }
     }
 }

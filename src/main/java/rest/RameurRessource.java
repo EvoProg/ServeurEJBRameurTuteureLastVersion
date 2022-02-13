@@ -33,7 +33,7 @@ public class RameurRessource {
         String identifiant = "";
         int id = sb.getDernierIdRameur();
         identifiant += id;
-        System.out.println(identifiant);
+        //System.out.println(identifiant);
         return identifiant;
     }
 
@@ -74,8 +74,8 @@ public class RameurRessource {
                 e.printStackTrace();
             }
         }
-        System.out.println("Sortie de la boucle getRameurSessionType");
-        System.out.println(type);
+        //System.out.println("Sortie de la boucle getRameurSessionType");
+        //System.out.println(type);
         return type;
     }
 
@@ -105,8 +105,8 @@ public class RameurRessource {
 
         valeur = "" + val;
 
-        System.out.println("Sortie de la boucle getRameurSessionValeur");
-        System.out.println(valeur);
+        //System.out.println("Sortie de la boucle getRameurSessionValeur");
+        //System.out.println(valeur);
         return valeur;
     }
 }

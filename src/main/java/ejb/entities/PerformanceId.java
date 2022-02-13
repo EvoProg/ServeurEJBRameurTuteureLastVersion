@@ -6,7 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Objects;
+
+import static java.lang.Math.abs;
 
 /*
     Classe regroupant les PRIMARY KEY de la table "performances".
@@ -27,7 +31,7 @@ public class PerformanceId implements Serializable {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -50,6 +54,17 @@ public class PerformanceId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(idSession, idUtil, timestamp);
+    }
+
+    //Méthode renvoyant une date à partir du TimeStamp
+    public String getDateTime(){
+        //On crée la Date
+        Date date = new Date(abs(this.getTimestamp()));
+        //On lui donne le format le plus court possible
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.SHORT);
+        return shortDateFormat.format(date);
     }
 
     @Override

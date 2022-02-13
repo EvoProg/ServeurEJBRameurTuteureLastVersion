@@ -31,15 +31,15 @@
     <!--Affichage des messages d'erreur-->
     <p class="message">${Message}</p>
 
-    <section class="field"></section>
+    <br>
 
+    <c:if test="${rameurs != null}">
     <!-- Sélection du rameur et de la valeur de la session -->
         <fieldset>
             <legend>Session</legend>
             <form class="test" action="EntrainementControleur" method="post">
 
                 <!-- Tableau Rameurs -->
-                <c:if test="${rameurs.size() != 0}">
                     <fieldset>
                         <legend>Choisissez votre rameur :</legend>
                         <div class="cadre_table_scroll">
@@ -66,30 +66,31 @@
                             </table>
                         </div>
                     </fieldset>
-                </c:if>
 
-                <fieldset>
-                    <legend>Entrés les différentes valeurs : </legend>
+                    <fieldset>
+                        <legend>Entrés les différentes valeurs : </legend>
+                        <br>
+                        <label class="temps_label">Temps de repos : </label>
+                        <input type="number" name="temps_repos" id="temps_s" class="temps-txt-field" required min="60" max="180">
+                        <label class="distance_label">Distance (en mètres) : </label>
+                        <input type="number"  name="distance_s" id="distance_s" class="distance-txt-field" required min="100" max="4000">
+                        <label class="nombre_session">Nombre de répétitions : </label>
+                        <input type="number"  name="nombre_s" id="nombre_ses" class="distance-txt-field" required min="2" max="10">
+                        <br>
+                    </fieldset>
+
                     <br>
-                    <label class="temps_label">Temps de repos : </label>
-                    <input type="number" name="temps_repos" id="temps_s" class="temps-txt-field" required min="60" max="180">
-                    <label class="distance_label">Distance (en mètres) : </label>
-                    <input type="number"  name="distance_s" id="distance_s" class="distance-txt-field" required min="100" max="4000">
-                    <label class="nombre_session">Nombre de répétitions : </label>
-                    <input type="number"  name="nombre_s" id="nombre_ses" class="distance-txt-field" required min="2" max="10">
-                    <br>
-                </fieldset>
 
-                <section class="field"></section>
+                    <input type="hidden" name="identifiant" value="${Utilisateur.getId()}">
 
-                <input type="hidden" name="identifiant" value="${Utilisateur.getId()}">
+                    <input type="submit" name="action" value="Confirmer" class="launch">
 
-                <input type="submit" name="action" value="Confirmer" class="launch">
-
-            </form>
-        </fieldset>
-</section>
+                </form>
+            </fieldset>
+        </c:if>
+    </section>
 
 </body>
+
 </html>
 

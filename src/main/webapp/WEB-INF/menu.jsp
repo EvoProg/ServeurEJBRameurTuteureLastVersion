@@ -135,6 +135,7 @@
                 <thead>
                     <tr>
                         <th>Numéro de la session</th>
+                        <th>Date de la session</th>
                         <th>Temps en seconde</th>
                         <th>Distance en centimètre</th>
                         <th>Coups par minute</th>
@@ -147,20 +148,24 @@
                 <tbody>
                     <c:if test="${DernieresPerformances.size() != 0}">
                         <c:forEach items="${DernieresPerformances}" var="perf">
-                            <td>${perf.getId().getIdSession()}</td>
-                            <td>${perf.getId().getTimestamp()}</td>
-                            <td>${perf.getDistanceCm()}</td>
-                            <td>${perf.getCoupsPm()}</td>
-                            <td>${perf.getPuissanceW()}</td>
-                            <td>${perf.getRythmeMs()}</td>
-                            <td>${perf.getCalories()}</td>
-                            <td>${perf.getFrequenceBpm()}</td>
+                            <tr class="inputrameur">
+                                <td>${perf.getId().getIdSession()}</td>
+                                <td>${perf.getId().getDateTime()}</td>
+                                <td>${perf.getTempsCs()}</td>
+                                <td>${perf.getDistanceCm()}</td>
+                                <td>${perf.getCoupsPm()}</td>
+                                <td>${perf.getPuissanceW()}</td>
+                                <td>${perf.getRythmeMs()}</td>
+                                <td>${perf.getCalories()}</td>
+                                <td>${perf.getFrequenceBpm()}</td>
+                            </tr>
                         </c:forEach>
                     </c:if>
                 </tbody>
             </table>
         </div>
     </section>
+</div>
 
 </body>
 </html>

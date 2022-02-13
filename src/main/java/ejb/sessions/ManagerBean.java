@@ -5,6 +5,7 @@ import ejb.entities.PerformanceId;
 import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,9 @@ public class ManagerBean implements ManagerBeanLocal{
     //C'est à partir de lui que l'on peut construire des objets de type EntityManager, qui nous permettent d'interagir avec la base.
 
     private final EntityManager em = emFactoryObj.createEntityManager();
+
+    @EJB
+    private SessionBeanLocal sb;
 
 
     //Méthode pour récupérer une Liste de Performances depuis la BD
@@ -101,7 +105,7 @@ public class ManagerBean implements ManagerBeanLocal{
         int idSession = this.getDerniereSession(idUtil);
 
         //On vérifie si la dernière Session n'est pas égale à 0
-        if(idSession != 0)
+        if(idSession != 1)
         {
             //On récupère la dernière Session de l'utilisateur en appelant la méthode
             // pour récupérer une Liste de Performances selon un Utilisateur et une Session depuis la BD
@@ -165,19 +169,21 @@ public class ManagerBean implements ManagerBeanLocal{
 
     //Méthode permettant de rechercher la dernière session effectuer par un Utilisateur
     @Override
-    public int getDerniereSession(int idUtil) {
+    public synchronized int getDerniereSession(int idUtil) {
         List<Performance> performances = null;
-        //On récupère la liste des performances de l'utilisateur
+        //On récupère la liste des dernières performances de l'utilisateur
         performances = this.getListePerformancesParUtilisateur(idUtil);
 
-        //On recherche la dernière session de l'utilisateur
-        int idSession = 0;
+        int idSession = 1;
         for (int i = 0; i < performances.size(); i++) {
-            if(idSession > performances.get(i).getId().getIdSession())
+            //System.out.println(performances.get(i).getId().getIdSession());
+            if(idSession <= performances.get(i).getId().getIdSession())
                 idSession = performances.get(i).getId().getIdSession();
         }
 
-        return idSession+1;
+        //System.out.println("Identifiant terminal : "+idSession);
+
+        return idSession;
     }
 
     //Méthode ajoutant une performance et ses valeurs dans la BD
@@ -189,26 +195,20 @@ public class ManagerBean implements ManagerBeanLocal{
         PerformanceId performanceId = new PerformanceId();
 
         //Variable de temps
-        int timer = (int)System.currentTimeMillis();
+        long timer = System.currentTimeMillis();
 
         //On ajoute les valeurs dans les classes
         //Id
-        Integer idRameur = p.getIdRameur();
-        Rameur rameur = null;
+        int idRameur = p.getIdRameur();
 
-        //Récupération du rameur selon un Id depuis la BD
-        Query q = em.createNamedQuery("rameur_id");
-        q.setParameter("idRameur",idRameur);
+        Rameur rameur = sb.getRameur(idRameur);
 
-        try{
-            rameur = (Rameur) q.getSingleResult();
-        }catch (Exception e){
-            //Si le rameur n'existe pas
-            System.out.println("Erreur dans getRameur connection BD : "+e.getMessage());
-        }
         performanceId.setTimestamp(timer);
         performanceId.setIdSession(rameur.getIdSession());
         performanceId.setIdUtil(rameur.getIdUtil());
+
+        //System.out.println("addPerf/Identifiant de l'utilisateur : " + performanceId.getIdUtil());
+        //System.out.println("addPerf/Session de l'utilisateur : " + performanceId.getIdSession());
 
         //On ajoute l'Id à la performance
         //performance.setId(performanceId);

@@ -75,7 +75,7 @@ public class SessionBean implements SessionBeanLocal{
 
     //Méthode permettant de récupérer un rameur à partir d'un identifiant
     @Override
-    public Rameur getRameur(int idRameur) {
+    public synchronized Rameur getRameur(int idRameur) {
         //Variable renvoyée
         Rameur rameur = null;
 
@@ -138,6 +138,7 @@ public class SessionBean implements SessionBeanLocal{
 
         if(rameur != null){
             //On supprime le rameur de la BD
+            em.getTransaction().begin();
             em.remove(rameur);
 
             //On met à jour les données
@@ -145,6 +146,9 @@ public class SessionBean implements SessionBeanLocal{
             rameur.setValeur(valeur);
             rameur.setIdUtil(idutil);
             rameur.setIdSession(session);
+
+            //System.out.println("Session du rameur : "+session);
+            //System.out.println("Identifiant de l'utilisateur utilisant le rameur : "+idutil);
 
             //On remet le rameur dans la BD
             //Transaction à la BD

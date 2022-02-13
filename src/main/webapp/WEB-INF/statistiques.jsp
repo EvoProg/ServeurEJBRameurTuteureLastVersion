@@ -35,7 +35,7 @@
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>puissances_globales</p>
+                <img src="PuissanceGraphiqueControleur"></img>
             </section>
             <section class="boxcolonne">
                 <p>rythmes_globales</p>
@@ -45,7 +45,7 @@
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>calories_perdues</p>
+                <img src="CalorieGraphiqueControleur"></img>
             </section>
             <section class="boxcolonne">
                 <p>frequences_globales</p>

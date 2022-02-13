@@ -129,7 +129,7 @@ public class ManagerBean implements ManagerBeanLocal{
         {
             //On récupère les dernières Sessions de l'utilisateur en appelant la méthode
             // pour récupérer une Liste de Performances selon un Utilisateur et une Session depuis la BD
-            if(idSession >= 5)
+            if(idSession > 5)
             {
                 for (int i = idSession; i > idSession-5; i++) {
                     List<Performance> p = this.getListePerformancesParUtilisateurSession(idUtil,idSession);

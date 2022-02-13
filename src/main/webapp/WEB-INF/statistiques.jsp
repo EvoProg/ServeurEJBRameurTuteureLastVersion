@@ -25,30 +25,30 @@
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <p>distances_globales</p>
+                <img src="DistanceGraphiqueControleur">
             </section>
             <section class="boxcolonne">
-                <p>coups_globales</p>
-            </section>
-        </div>
-
-    <br>
-        <div class="container">
-            <section class="boxcolonne">
-                <img src="PuissanceGraphiqueControleur"></img>
-            </section>
-            <section class="boxcolonne">
-                <p>rythmes_globales</p>
+                <img src="CoupsGraphiqueControleur">
             </section>
         </div>
 
     <br>
         <div class="container">
             <section class="boxcolonne">
-                <img src="CalorieGraphiqueControleur"></img>
+                <img src="PuissanceGraphiqueControleur">
             </section>
             <section class="boxcolonne">
-                <p>frequences_globales</p>
+                <img src="RythmeGraphiqueControleur">
+            </section>
+        </div>
+
+    <br>
+        <div class="container">
+            <section class="boxcolonne">
+                <img src="CalorieGraphiqueControleur">
+            </section>
+            <section class="boxcolonne">
+                <img src="FrequenceGraphiqueControleur">
             </section>
         </div>
 

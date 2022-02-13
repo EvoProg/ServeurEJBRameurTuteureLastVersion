@@ -16,13 +16,28 @@ public class Statistiques {
     private ManagerBeanLocal mg;
 
     private List<Performance> perfs;
-    private int nbSession;
+    private List<Integer> session;
 
     //Constructeur
     public Statistiques(int idUtil){
         this.mg = new ManagerBean();
         this.perfs = mg.getListeCinqDernieresPerformances(idUtil);
-        this.nbSession = mg.getDerniereSession(idUtil);
+        this.session = this.initSession();
+    }
+
+    public List<Integer> initSession(){
+        List<Integer> session = new ArrayList<>();
+        int idSession = 0;
+        for (int i = 0; i < this.perfs.size(); i++) {
+            //System.out.println(performances.get(i).getId().getIdSession());
+            if(idSession < this.perfs.get(i).getId().getIdSession()) {
+                idSession =  this.perfs.get(i).getId().getIdSession();
+                //System.out.println(idSession);
+                session.add(idSession);
+            }
+        }
+
+        return session;
     }
 
     //Accesseurs en lecture
@@ -30,7 +45,7 @@ public class Statistiques {
         return perfs;
     }
 
-    public int getSession() {return nbSession;}
+    public List<Integer> getSession() {return session;}
 
     public String getPerfSessionfDate(int idSession){
         String res = "";
@@ -44,23 +59,51 @@ public class Statistiques {
     }
 
     //Calcul de la puissance moyenne d'une session
-    public double PuissanceMoyenne(int idSession) {
-        int puissance = 0;
+    public double CoupsPmMoyenne(int idSession) {
+        int coups = 0;
         int index = 0;
         for (Performance p:perfs) {
             if(p.getId().getIdSession() == idSession) {
-                puissance += p.getPuissanceW();
+                coups += p.getCoupsPm();
                 index++;
             }
         }
-        return puissance/index;
+        return coups/index;
     }
+
+    //Calcul de la puissance moyenne d'une session
+    public double RythmeMoyenne(int idSession) {
+        int rythme = 0;
+        int index = 0;
+        for (Performance p:perfs) {
+            if(p.getId().getIdSession() == idSession) {
+                rythme += p.getRythmeMs();
+                index++;
+            }
+        }
+        return rythme/index;
+    }
+
+    //Calcul de la puissance moyenne d'une session
+    public double FrequenceMoyenne(int idSession) {
+        int frequence = 0;
+        int index = 0;
+        for (Performance p:perfs) {
+            if(p.getId().getIdSession() == idSession) {
+                frequence += p.getFrequenceBpm();
+                index++;
+            }
+        }
+        return frequence/index;
+    }
+
 
     //Calcul des calories perdues à chaque session
     public double CaloriesTotales(int idSession){
         int calories = 0;
         for (Performance p:perfs) {
             if(p.getId().getIdSession() == idSession) {
+                //System.out.println("Calories : "+calories);
                 calories += p.getCalories();
             }
         }
@@ -72,28 +115,22 @@ public class Statistiques {
         int distance = 0;
         for (Performance p:perfs) {
             if(p.getId().getIdSession() == idSession) {
-                distance += p.getCalories();
+                distance += p.getDistanceCm();
             }
         }
         return distance;
     }
 
-    //Renvoie un tableau de double de données
-    public double[][] getPuissanceMoySessions(int idSession) {
+    public List<Performance> getPerfSession(int idSession){
         List<Performance> performances = new ArrayList<>();
-        for (Performance p:perfs) {
-            if(p.getId().getIdSession() == idSession) {
-                performances.add(p);
+
+        for (int i = 0; i < this.perfs.size(); i++) {
+            if(perfs.get(i).getId().getIdSession() == idSession) {
+                performances.add(perfs.get(i));
             }
         }
 
-        double dataset[][] = new double[2][performances.size()];
-
-        for (int i = 0; i < performances.size(); i++) {
-            dataset[0][i] = performances.get(i).getTempsCs();
-            dataset[1][i] = performances.get(i).getPuissanceW();
-        }
-
-        return dataset;
+        return performances;
     }
+
 }

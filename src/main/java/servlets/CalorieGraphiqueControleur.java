@@ -14,7 +14,7 @@ public class CalorieGraphiqueControleur extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
         Graphiques graph = new Graphiques(utilisateur.getId());
-        graph.getPuissanceMoyGraph(response);
+        graph.getCaloriesGraph(response);
     }
 
     @Override

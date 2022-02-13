@@ -83,7 +83,7 @@ public class SessionControleur extends HttpServlet {
         int session = mg.getDerniereSession(identifiant)+1;
 
         //System.out.println("Identifiant de l'utilisateur : " + identifiant);
-        //System.out.println("Session de l'utilisateur : " + session);
+        System.out.println("Session de l'utilisateur : " + session);
 
         //Vérification
         if(temps_s != null){

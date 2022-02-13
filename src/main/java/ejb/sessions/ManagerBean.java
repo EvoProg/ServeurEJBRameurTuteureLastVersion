@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -105,7 +106,7 @@ public class ManagerBean implements ManagerBeanLocal{
         int idSession = this.getDerniereSession(idUtil);
 
         //On vérifie si la dernière Session n'est pas égale à 0
-        if(idSession != 1)
+        if(idSession != 0)
         {
             //On récupère la dernière Session de l'utilisateur en appelant la méthode
             // pour récupérer une Liste de Performances selon un Utilisateur et une Session depuis la BD
@@ -123,6 +124,7 @@ public class ManagerBean implements ManagerBeanLocal{
 
         //On appel la méthode permettant de rechercher la dernière session effectuer par un Utilisateur
         int idSession = this.getDerniereSession(idUtil);
+        //System.out.println(idSession);
 
         //On vérifie si la dernière Session n'est pas égale à 0
         if(idSession != 0)
@@ -131,11 +133,11 @@ public class ManagerBean implements ManagerBeanLocal{
             // pour récupérer une Liste de Performances selon un Utilisateur et une Session depuis la BD
             if(idSession > 5)
             {
-                for (int i = idSession; i > idSession-5; i++) {
-                    List<Performance> p = this.getListePerformancesParUtilisateurSession(idUtil,idSession);
-
+                performances = new ArrayList<>();
+                for (int i = (idSession-4); i <= idSession; i++) {
+                    List<Performance> p = this.getListePerformancesParUtilisateurSession(idUtil,i);
                     for (int j = 0; j < p.size(); j++) {
-                        performances.add(p.get(i));
+                        performances.add(p.get(j));
                     }
                 }
             }else{
@@ -174,7 +176,7 @@ public class ManagerBean implements ManagerBeanLocal{
         //On récupère la liste des dernières performances de l'utilisateur
         performances = this.getListePerformancesParUtilisateur(idUtil);
 
-        int idSession = 1;
+        int idSession = 0;
         for (int i = 0; i < performances.size(); i++) {
             //System.out.println(performances.get(i).getId().getIdSession());
             if(idSession <= performances.get(i).getId().getIdSession())

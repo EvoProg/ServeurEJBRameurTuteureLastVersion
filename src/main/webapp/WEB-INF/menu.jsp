@@ -151,7 +151,7 @@
                             <tr class="inputrameur">
                                 <td>${perf.getId().getIdSession()}</td>
                                 <td>${perf.getId().getDateTime()}</td>
-                                <td>${perf.getTempsCs()}</td>
+                                <td>${perf.getTempsCs()/100}</td>
                                 <td>${perf.getDistanceCm()}</td>
                                 <td>${perf.getCoupsPm()}</td>
                                 <td>${perf.getPuissanceW()}</td>

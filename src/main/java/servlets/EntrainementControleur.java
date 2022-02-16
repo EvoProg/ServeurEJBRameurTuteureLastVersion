@@ -1,6 +1,7 @@
 package servlets;
 
 import ejb.entities.Rameur;
+import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
 
@@ -42,10 +43,57 @@ public class EntrainementControleur extends HttpServlet {
     //Traitement de la requête HTTP Post. Liée au formulaire de la jsp "entrainement" après sélection des paramètres.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //On récupère les données de la jsp "menu" dans le formulaire post
+        String action = request.getParameter("action");
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
+        int identifiant = utilisateur.getId();
+
+        //On vérifie quelle action a été sélectionnée
+        if(action.equals("Confirmer")){
+            //On met à jour les données
+            confirmerEntrainement(identifiant,request, response);
+        }
+
         //On renvoie les données dans la JSP
         sendRameursEnAttentes(request);
         request.setAttribute("entrainement", true);
         this.getServletContext().getRequestDispatcher("/WEB-INF/entrainement.jsp").forward(request, response);
+    }
+
+    //Methode confirmant les paramètres d'un entrainement
+    protected void confirmerEntrainement(int identifiant, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //On récupère les données
+        String temps_repos = request.getParameter("temps_repos");
+        String distance_m = request.getParameter("distance_s");
+        String nb_repetition = request.getParameter("nb_repetition");
+        String rameur = request.getParameter("rameur");
+
+        int id = 0;
+
+        if(rameur != "") {
+            id = Integer.parseInt(rameur);
+        }else{
+            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
+            //On renvoie vers la page de connexion
+            this.getServletContext().getRequestDispatcher("/").forward(request,response);
+        }
+
+        //On récupère la dernière session de l'utilisateur
+        int session = mg.getDerniereSession(identifiant)+1;
+
+        //System.out.println("Identifiant de l'utilisateur : " + identifiant);
+        System.out.println("Session de l'utilisateur : " + session);
+
+        //Temps de repos
+        int tps_rps = Integer.parseInt(temps_repos);
+
+        //Valeur de la distance a parcourir
+        int dist = Integer.parseInt(distance_m);
+
+        //Nombre de répétition
+        int repetition = Integer.parseInt(nb_repetition);
+
+        sb.updateRameur(id,"entrainement",dist,identifiant,session,tps_rps,repetition);
     }
 
     //Méthode pour renvoyer les rameurs dans la jsp

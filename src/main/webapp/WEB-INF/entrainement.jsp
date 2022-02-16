@@ -70,18 +70,16 @@
                     <fieldset>
                         <legend>Entrés les différentes valeurs : </legend>
                         <br>
-                        <label class="temps_label">Temps de repos : </label>
+                        <label class="temps_label">Temps de repos (en seconde) : </label>
                         <input type="number" name="temps_repos" id="temps_s" class="temps-txt-field" required min="60" max="180">
                         <label class="distance_label">Distance (en mètres) : </label>
-                        <input type="number"  name="distance_s" id="distance_s" class="distance-txt-field" required min="100" max="4000">
+                        <input type="number"  name="distance_s" id="distance_m" class="distance-txt-field" required min="100" max="4000">
                         <label class="nombre_session">Nombre de répétitions : </label>
-                        <input type="number"  name="nombre_s" id="nombre_ses" class="distance-txt-field" required min="2" max="10">
+                        <input type="number"  name="nb_repetition" id="nb_repetition" class="distance-txt-field" required min="2" max="10">
                         <br>
                     </fieldset>
 
                     <br>
-
-                    <input type="hidden" name="identifiant" value="${Utilisateur.getId()}">
 
                     <input type="submit" name="action" value="Confirmer" class="launch">
 

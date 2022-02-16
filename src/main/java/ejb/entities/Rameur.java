@@ -22,35 +22,40 @@ public class Rameur implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "id_util")
+    private Integer idUtil;
+
+    @Column(name = "id_session")
+    private Integer idSession;
+
     @Column(name = "course", length = 50)
     private String course;
 
     @Column(name = "valeur")
     private Integer valeur;
 
-    @Column(name="idutil")
-    private Integer idUtil;
+    @Column(name = "repos")
+    private Integer repos;
 
-    @Column(name="idsession")
-    private Integer idSession;
+    @Column(name = "repetition")
+    private Integer repetition;
 
-    public Integer getIdUtil() {
-        return idUtil;
+    public Integer getRepetition() {
+        return repetition;
     }
 
-    public void setIdUtil(Integer idUtil) {
-        this.idUtil = idUtil;
+    public void setRepetition(Integer repetition) {
+        this.repetition = repetition;
     }
 
-    public Integer getIdSession() {
-        return idSession;
+    public Integer getRepos() {
+        return repos;
     }
 
-    public void setIdSession(Integer idSession) {
-        this.idSession = idSession;
+    public void setRepos(Integer repos) {
+        this.repos = repos;
     }
 
-    //Accesseurs en écriture et en lecture
     public Integer getValeur() {
         return valeur;
     }
@@ -65,6 +70,22 @@ public class Rameur implements Serializable {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public Integer getIdSession() {
+        return idSession;
+    }
+
+    public void setIdSession(Integer idSession) {
+        this.idSession = idSession;
+    }
+
+    public Integer getIdUtil() {
+        return idUtil;
+    }
+
+    public void setIdUtil(Integer idUtil) {
+        this.idUtil = idUtil;
     }
 
     public Integer getId() {

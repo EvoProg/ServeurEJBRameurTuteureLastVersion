@@ -28,15 +28,16 @@ public class Statistiques {
     public List<Integer> initSession(){
         List<Integer> session = new ArrayList<>();
         int idSession = 0;
-        for (int i = 0; i < this.perfs.size(); i++) {
-            //System.out.println(performances.get(i).getId().getIdSession());
-            if(idSession < this.perfs.get(i).getId().getIdSession()) {
-                idSession =  this.perfs.get(i).getId().getIdSession();
-                //System.out.println(idSession);
-                session.add(idSession);
+        if(this.perfs != null) {
+            for (int i = 0; i < this.perfs.size(); i++) {
+                //System.out.println(performances.get(i).getId().getIdSession());
+                if (idSession < this.perfs.get(i).getId().getIdSession()) {
+                    idSession = this.perfs.get(i).getId().getIdSession();
+                    //System.out.println(idSession);
+                    session.add(idSession);
+                }
             }
         }
-
         return session;
     }
 

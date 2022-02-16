@@ -1,6 +1,7 @@
 package servlets;
 
 import ejb.entities.Performance;
+import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
@@ -66,36 +67,41 @@ public class SessionControleur extends HttpServlet {
         String temps_s = request.getParameter("temps_s");
         String distance_s = request.getParameter("distance_s");
         String rameur = request.getParameter("rameur");
-
-        /*MAJ avenir, Sécurité pour les problèmes de concurrency entre deux rameurs*/
+        Rameur rameur_en_attente = null;
 
         int id = 0;
 
-        if(rameur != "") {
+        if (rameur != "") {
             id = Integer.parseInt(rameur);
-        }else{
-            request.setAttribute("Message","Une erreur est survenue, veuillez réessayer ultérieurement");
+            rameur_en_attente = sb.getRameur(id);
+        } else {
+            request.setAttribute("Message", "Une erreur est survenue, veuillez réessayer ultérieurement");
             //On renvoie vers la page de connexion
-            this.getServletContext().getRequestDispatcher("/").forward(request,response);
+            this.getServletContext().getRequestDispatcher("/").forward(request, response);
         }
 
+
         //On récupère la dernière session de l'utilisateur
-        int session = mg.getDerniereSession(identifiant)+1;
+        int session = mg.getDerniereSession(identifiant) + 1;
 
         //System.out.println("Identifiant de l'utilisateur : " + identifiant);
         System.out.println("Session de l'utilisateur : " + session);
 
-        //Vérification
-        if(temps_s != null){
-            //Session sur le temps
-            int tps = Integer.parseInt(temps_s);
+        if (rameur_en_attente.getValeur() == 0 && rameur_en_attente != null){
             //Vérification
-            sb.updateRameur(id,"temps",tps,identifiant,session);
+            if (temps_s != null) {
+                //Session sur le temps
+                int tps = Integer.parseInt(temps_s);
+                //Vérification
+                sb.updateRameur(id, "temps", tps, identifiant, session, 0, 0);
+            } else {
+                //Session sur la distance
+                int dist = Integer.parseInt(distance_s);
+                //Vérification
+                sb.updateRameur(id, "distance", dist, identifiant, session, 0, 0);
+            }
         }else{
-            //Session sur la distance
-            int dist = Integer.parseInt(distance_s);
-            //Vérification
-            sb.updateRameur(id,"distance",dist,identifiant,session);
+            request.setAttribute("Message","Le rameur est déjà utilisé, veuillez en sélectionner un autre");
         }
     }
 

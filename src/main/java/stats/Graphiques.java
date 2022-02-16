@@ -53,18 +53,19 @@ public class Graphiques {
 
     private XYDataset createDatasetPerformances(){
         XYSeriesCollection dataset = new XYSeriesCollection();
-        for (int i = 0; i < st.getSession().size(); i++) {
-            XYSeries series = new XYSeries("Session n° "+st.getSession().get(i));
-            List<Performance> performances = st.getPerfSession(st.getSession().get(i));
+        if(st.getPerfs() != null) {
+            for (int i = 0; i < st.getSession().size(); i++) {
+                XYSeries series = new XYSeries("Session n° " + st.getSession().get(i));
+                List<Performance> performances = st.getPerfSession(st.getSession().get(i));
 
-            series.add(0,performances.get(0).getPuissanceW());
+                series.add(0, performances.get(0).getPuissanceW());
 
-            for (int j = 1; j < performances.size(); j++) {
-                series.add(j,performances.get(j).getPuissanceW());
+                for (int j = 1; j < performances.size(); j++) {
+                    series.add(j, performances.get(j).getPuissanceW());
+                }
+                dataset.addSeries(series);
             }
-            dataset.addSeries(series);
         }
-
         return dataset;
     }
 
@@ -79,8 +80,10 @@ public class Graphiques {
 
     private DefaultCategoryDataset createDatasetCalories(){
         DefaultCategoryDataset result = new DefaultCategoryDataset();
-        for (int i = 0; i < st.getSession().size(); i++) {
-            result.addValue(st.CaloriesTotales(st.getSession().get(i)), "Session n° " + st.getSession().get(i), st.getPerfSessionfDate(st.getSession().get(i)));
+        if(st.getPerfs() != null) {
+            for (int i = 0; i < st.getSession().size(); i++) {
+                result.addValue(st.CaloriesTotales(st.getSession().get(i)), "Session n° " + st.getSession().get(i), st.getPerfSessionfDate(st.getSession().get(i)));
+            }
         }
         return result;
     }
@@ -96,8 +99,10 @@ public class Graphiques {
 
     private DefaultCategoryDataset createDatasetDistances(){
         DefaultCategoryDataset result = new DefaultCategoryDataset();
-        for (int i = 0; i < st.getSession().size(); i++) {
-            result.addValue(st.DistancesTotales(st.getSession().get(i)),"Session n° "+st.getSession().get(i), st.getPerfSessionfDate(st.getSession().get(i)));
+        if(st.getPerfs() != null) {
+            for (int i = 0; i < st.getSession().size(); i++) {
+                result.addValue(st.DistancesTotales(st.getSession().get(i)), "Session n° " + st.getSession().get(i), st.getPerfSessionfDate(st.getSession().get(i)));
+            }
         }
         return result;
     }
@@ -113,13 +118,15 @@ public class Graphiques {
 
     private XYDataset createDatasetCoups(){
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("Evolution des coups moyens par sessions");
-        for (int i = 0; i < st.getSession().size(); i++) {
-            int session = st.getSession().get(i);
-            double moyenne = st.CoupsPmMoyenne(st.getSession().get(i));
-            series.add(session, moyenne);
+        if(st.getPerfs() != null) {
+            XYSeries series = new XYSeries("Evolution des coups moyens par sessions");
+            for (int i = 0; i < st.getSession().size(); i++) {
+                int session = st.getSession().get(i);
+                double moyenne = st.CoupsPmMoyenne(st.getSession().get(i));
+                series.add(session, moyenne);
+            }
+            dataset.addSeries(series);
         }
-        dataset.addSeries(series);
         return dataset;
     }
 
@@ -138,10 +145,12 @@ public class Graphiques {
 
     private DefaultPieDataset createDatasetRythme(){
         DefaultPieDataset dataset = new DefaultPieDataset();
-        for (int i = 0; i < st.getSession().size(); i++) {
-            int session = st.getSession().get(i);
-            double moyenne = st.RythmeMoyenne(st.getSession().get(i));
-            dataset.setValue("Session n° "+session+" : "+moyenne, moyenne);
+        if(st.getPerfs() != null) {
+            for (int i = 0; i < st.getSession().size(); i++) {
+                int session = st.getSession().get(i);
+                double moyenne = st.RythmeMoyenne(st.getSession().get(i));
+                dataset.setValue("Session n° " + session + " : " + moyenne, moyenne);
+            }
         }
         return dataset;
     }
@@ -157,13 +166,16 @@ public class Graphiques {
 
     private XYDataset createDatasetFrequence(){
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("Evolution de la Fréquence cardiaque moyens par sessions");
-        for (int i = 0; i < st.getSession().size(); i++) {
-            int session = st.getSession().get(i);
-            double moyenne = st.FrequenceMoyenne(st.getSession().get(i));
-            series.add(session, moyenne);
+        if(st.getPerfs() != null) {
+            XYSeries series = new XYSeries("Evolution de la Fréquence cardiaque moyens par sessions");
+            for (int i = 0; i < st.getSession().size(); i++) {
+                int session = st.getSession().get(i);
+                double moyenne = st.FrequenceMoyenne(st.getSession().get(i));
+                series.add(session, moyenne);
+            }
+
+            dataset.addSeries(series);
         }
-        dataset.addSeries(series);
         return dataset;
     }
 

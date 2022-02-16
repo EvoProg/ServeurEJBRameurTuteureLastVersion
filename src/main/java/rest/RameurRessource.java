@@ -49,7 +49,7 @@ public class RameurRessource {
         if (idRameur != ""){
             identifiantRameur = Integer.parseInt(idRameur);
 
-            sb.updateRameur(identifiantRameur,"",0,0,0);
+            sb.updateRameur(identifiantRameur,"",0,0,0,0,0);
         }
     }
 
@@ -108,6 +108,68 @@ public class RameurRessource {
         //System.out.println("Sortie de la boucle getRameurSessionValeur");
         //System.out.println(valeur);
         return valeur;
+    }
+
+    //Méthode permettant de récupérer la valeur de la session d'un rameur
+    @Path("/repos")
+    @PUT
+    @Produces("text/plain")
+    public String getRameurSessionRepos(String idRameur) {
+        //Variables
+        String repos = "";
+        int identifiantRameur = Integer.parseInt(idRameur);
+        System.out.println(identifiantRameur);
+        int val = 1;
+        //Vérification des variables passées en paramètres et traitement de la requête
+        while (val == 1){
+            Rameur rameur = sb.getRameur(identifiantRameur);
+            if(rameur != null) {
+                val = rameur.getRepos();
+            }
+            //System.out.println("Je suis là ! : "+val);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        repos = "" + val;
+
+        //System.out.println("Sortie de la boucle getRameurSessionValeur");
+        //System.out.println(valeur);
+        return repos;
+    }
+
+    //Méthode permettant de récupérer la valeur de la session d'un rameur
+    @Path("/repetition")
+    @PUT
+    @Produces("text/plain")
+    public String getRameurSessionRepetition(String idRameur) {
+        //Variables
+        String repetition = "";
+        int identifiantRameur = Integer.parseInt(idRameur);
+        System.out.println(identifiantRameur);
+        int val = 1;
+        //Vérification des variables passées en paramètres et traitement de la requête
+        while (val == 1){
+            Rameur rameur = sb.getRameur(identifiantRameur);
+            if(rameur != null) {
+                val = rameur.getRepetition();
+            }
+            //System.out.println("Je suis là ! : "+val);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        repetition = "" + val;
+
+        //System.out.println("Sortie de la boucle getRameurSessionValeur");
+        //System.out.println(valeur);
+        return repetition;
     }
 
     @DELETE

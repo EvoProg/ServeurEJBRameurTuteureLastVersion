@@ -28,4 +28,6 @@ public interface SessionBeanLocal {
 
     //Méthode permettant de renvoyer le dernier ID Rameur utilisé et de l'incrémenter
     public int getDernierIdRameur();
+
+    public void deleteRameur(String idRameur);
 }

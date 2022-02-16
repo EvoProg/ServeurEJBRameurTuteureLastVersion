@@ -188,4 +188,20 @@ public class SessionBean implements SessionBeanLocal{
         return idRameur;
     }
 
+    @Override
+    public void deleteRameur(String idRameur) {
+        int idR = Integer.parseInt(idRameur);
+        Rameur r = getRameur(idR);
+        boolean transactionOk = false;
+        try{
+            em.remove(r);
+            transactionOk = true;
+        }finally {
+            //Si l'ajout a bien eu lieu
+            if (transactionOk)
+                em.getTransaction().commit();
+            else
+                em.getTransaction().rollback();
+        }
+    }
 }

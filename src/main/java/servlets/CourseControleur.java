@@ -1,6 +1,8 @@
 package servlets;
 
 import ejb.entities.Rameur;
+import ejb.entities.Utilisateur;
+import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
@@ -16,6 +18,9 @@ public class CourseControleur extends HttpServlet
 {
     @EJB
     private SessionBeanLocal sb;
+
+    @EJB
+    private CourseBean cb;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -33,6 +38,9 @@ public class CourseControleur extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
+        int Distance = Integer.parseInt(request.getParameter("Distance"));
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
+        cb.init(utilisateur.getId());
+        cb.lancerDefis(Distance,0);
     }
 }

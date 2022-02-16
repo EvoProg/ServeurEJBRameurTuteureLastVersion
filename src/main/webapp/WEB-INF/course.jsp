@@ -55,7 +55,7 @@
                 </div>
 
                 <div id="div-choix-type-course">
-                    <form>
+                    <form action="/CourseControleur" method="post">
                         <fieldset>
                             <legend>Choisissez un type de course:</legend>
 
@@ -65,7 +65,7 @@
                             <input type="radio" id="radio-distance" name="radio-choix-course" required>
                             <label for="radio-distance">Distance</label>
 
-                            <input type="number" required>
+                            <input name="Distance" id="Distance" type="number" required>
 
                             <button id="bouton-valider-type" value="valider-type" type="submit">Valider</button>
                         </fieldset>

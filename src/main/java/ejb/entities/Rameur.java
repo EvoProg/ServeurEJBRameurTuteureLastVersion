@@ -34,26 +34,26 @@ public class Rameur implements Serializable {
     @Column(name = "valeur")
     private Integer valeur;
 
-    @Column(name = "repos")
+    @Column(name="repos")
     private Integer repos;
 
-    @Column(name = "repetition")
+    @Column(name="repetition")
     private Integer repetition;
 
-    public Integer getRepetition() {
-        return repetition;
+    public Integer getIdUtil() {
+        return idUtil;
     }
 
-    public void setRepetition(Integer repetition) {
-        this.repetition = repetition;
+    public void setIdUtil(Integer idUtil) {
+        this.idUtil = idUtil;
     }
 
-    public Integer getRepos() {
-        return repos;
+    public Integer getIdSession() {
+        return idSession;
     }
 
-    public void setRepos(Integer repos) {
-        this.repos = repos;
+    public void setIdSession(Integer idSession) {
+        this.idSession = idSession;
     }
 
     public Integer getValeur() {
@@ -72,27 +72,27 @@ public class Rameur implements Serializable {
         this.course = course;
     }
 
-    public Integer getIdSession() {
-        return idSession;
-    }
-
-    public void setIdSession(Integer idSession) {
-        this.idSession = idSession;
-    }
-
-    public Integer getIdUtil() {
-        return idUtil;
-    }
-
-    public void setIdUtil(Integer idUtil) {
-        this.idUtil = idUtil;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getRepos() {
+        return repos;
+    }
+
+    public void setRepos(Integer repos) {
+        this.repos = repos;
+    }
+
+    public Integer getRepetition() {
+        return repetition;
+    }
+
+    public void setRepetition(Integer repetition) {
+        this.repetition = repetition;
     }
 }

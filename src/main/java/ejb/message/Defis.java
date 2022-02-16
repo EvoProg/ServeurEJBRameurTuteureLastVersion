@@ -1,4 +1,4 @@
-package ejb.message;
+/*package ejb.message;
 
 import java.io.Serializable;
 
@@ -37,3 +37,4 @@ public class Defis implements Serializable {
         this.distanceCourse = distanceCourse;
     }
 }
+*/

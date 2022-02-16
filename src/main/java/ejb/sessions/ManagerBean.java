@@ -177,10 +177,12 @@ public class ManagerBean implements ManagerBeanLocal{
         performances = this.getListePerformancesParUtilisateur(idUtil);
 
         int idSession = 0;
-        for (int i = 0; i < performances.size(); i++) {
-            //System.out.println(performances.get(i).getId().getIdSession());
-            if(idSession <= performances.get(i).getId().getIdSession())
-                idSession = performances.get(i).getId().getIdSession();
+        if (performances != null){
+            for (int i = 0; i < performances.size(); i++) {
+                //System.out.println(performances.get(i).getId().getIdSession());
+                if (idSession <= performances.get(i).getId().getIdSession())
+                    idSession = performances.get(i).getId().getIdSession();
+            }
         }
 
         //System.out.println("Identifiant terminal : "+idSession);

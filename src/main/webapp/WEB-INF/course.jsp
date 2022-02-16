@@ -18,7 +18,7 @@
 
     <body>
 
-        <%@include file="navigation.jsp"%>
+        <%@include file="navigation.jsp"%><
 
         <%@include file="deconnexion.jsp"%>
 
@@ -30,63 +30,88 @@
                 <!--Partie choix du rameur pour la course-->
                 <!--Seuls les rameurs disponibles sont affichés-->
                 <div id="div-choix-rameur-course">
-                    <!--TODO: lier le formulaire-->
+                    <fieldset>
+                        <legend>Choisissez votre rameur:</legend>
+                        <div class="scrollable-list">
+                            <!--TODO: lier le formulaire-->
+                            <form id="form-rameurs">
+                                <ul>
+                                    <c:choose>
+                                        <c:when test="${pasDeRameur}">
+                                            <li style="color: #c0001a">
+                                                Aucun rameur disponible pour le moment
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${rameurs}" var="rameur">
+                                                <li>
+                                                    <input type="radio" id="radio-choix-rameur${rameur.getId()}" name="radio-choix-rameur" required>
+                                                    <label for="radio-choix-rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
+                                                </li>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            </form>
+                        </div>
+
+                        <br>
+
+                        <button form="form-rameurs" id="bouton-valider-rameur" value="valider-rameur" type="submit">Valider</button>
+                    </fieldset>
+                </div>
+
+                <!--div id="div-choix-type-course">
                     <form>
                         <fieldset>
-                            <legend>Choisissez votre rameur:</legend>
-                            <div class="scrollable-list">
-                                <ul>
-                                    <c:forEach items="${rameurs}" var="rameur">
-                                        <li>
-                                            <input type="radio" id="radio-choix-rameur${rameur.getId()}" name="radio-choix-rameur" required>
-                                            <label for="radio-choix-rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
+                            <legend>Choisissez la distance à parcourir:</legend>
 
-                            <br>
+                            <input type="number" min="100" required>
 
-                            <button id="bouton-valider-rameur" value="valider-rameur" type="submit">Valider</button>
-                        </fieldset>
-
-
-                    </form>
-                </div>
-
-                <div id="div-choix-type-course">
-                    <form action="/CourseControleur" method="post">
-                        <fieldset>
-                            <legend>Choisissez un type de course:</legend>
-
-                            <input type="radio" id="radio-temps" name="radio-choix-course" required>
-                            <label for="radio-temps">Temps</label>
-
-                            <input type="radio" id="radio-distance" name="radio-choix-course" required>
-                            <label for="radio-distance">Distance</label>
-
-                            <input name="Distance" id="Distance" type="number" required>
-
-                            <button id="bouton-valider-type" value="valider-type" type="submit">Valider</button>
+                            <button id="bouton-valider-distance" value="valider-distance" type="submit">Valider</button>
                         </fieldset>
                     </form>
-                </div>
+                </div-->
             </div>
 
             <div id="div-course-partie-droite">
                 <!--Partie choix du type de course-->
                 <div id="div-choix-adversaire">
-                    <!--TODO: Lier le formulaire-->
-                    <form>
-                        <fieldset>
-                            <legend>Liste des adversaires disponibles:</legend>
-                            <!--TODO: afficher les utilisateurs disponibles pour une course-->
-                            <button id="bouton-valider-adversaire" value="valider-adversaire" type="button">Valider</button>
-                        </fieldset>
-                    </form>
+                    <button id="bouton-maj-adversaires">Rafraîchir</button>
+
+                    <fieldset>
+                        <legend>Liste des adversaires disponibles:</legend>
+
+                        <!--TODO: Lier le formulaire-->
+                        <form>
+                            <ul>
+                                <!--TODO: afficher les utilisateurs disponibles pour une course-->
+                                <c:choose>
+                                    <c:when test="${pasDAdversaire}">
+                                        <li style="color: #c0001a">
+                                            Aucun adversaire disponible pour le moment
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach items="${utilisateursDispos}" var="utilisateur">
+                                            <li>
+                                                <input type="radio" id="radio-choix-adversaire${utilisateur.getId()}" name="radio-choix-adversaire" required>
+                                                <label for="radio-choix-adversaire${utilisateur.getId()}">${utilisateur.getLogin()}</label>
+                                            </li>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+                            <label for="inputDistance">Choisissez la distance à parcourir (mètres)</label>
+                            <input id="inputDistance" type="number" min="100" required>
+
+                            <button id="bouton-valider-distance" value="valider-distance" type="submit">Valider</button>
+                        </form>
+                    </fieldset>
                 </div>
 
                 <div id="div-notifs-course">
+                    <!--TODO: Lier le formulaire-->
                     <form>
                         <fieldset>
                             <legend>Liste des défis reçus:</legend>

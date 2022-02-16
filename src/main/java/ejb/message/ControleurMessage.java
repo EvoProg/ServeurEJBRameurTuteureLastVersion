@@ -1,5 +1,6 @@
-package ejb.message;
+/*package ejb.message;
 
 
 public class ControleurMessage {
 }
+*/

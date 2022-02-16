@@ -29,8 +29,28 @@ public class CourseControleur extends HttpServlet
 
         //Récupération de la liste des rameurs disponibles
         List<Rameur> rameurs = sb.getListeRameursAttente(0);
+        if(rameurs.size() > 0)
+        {
+            request.setAttribute("rameurs", rameurs);
+            request.setAttribute("pasDeRameur", false);
+        }
+        else
+        {
+            request.setAttribute("pasDeRameur", true);
+        }
 
-        request.setAttribute("rameurs", rameurs);
+        //Récupération de la liste des utilisateurs disponibles pour une course
+        List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
+
+        if(utilisateursDispos.size() > 0)
+        {
+            request.setAttribute("utilisateursDispos", utilisateursDispos);
+            request.setAttribute("pasDAdversaire", false);
+        }
+        else
+        {
+            request.setAttribute("pasDAdversaire", true);
+        }
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
     }
@@ -38,9 +58,9 @@ public class CourseControleur extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        int Distance = Integer.parseInt(request.getParameter("Distance"));
+        /*int Distance = Integer.parseInt(request.getParameter("Distance"));
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
         cb.init(utilisateur.getId());
-        cb.lancerDefis(Distance,0);
+        cb.lancerDefis(Distance,0);*/
     }
 }

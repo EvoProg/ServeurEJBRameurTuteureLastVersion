@@ -1,4 +1,4 @@
-package ejb.message;
+/*package ejb.message;
 
 
 import javax.ejb.ActivationConfigProperty;
@@ -48,4 +48,4 @@ public class QueueListener implements MessageListener {
     public List<Defis> recupererDefis(){
         return defisList;
     }
-}
+}*/

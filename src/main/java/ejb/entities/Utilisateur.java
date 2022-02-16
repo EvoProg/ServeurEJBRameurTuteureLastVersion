@@ -14,7 +14,8 @@ import java.io.Serializable;
         @NamedQuery(name = "utilisateurs", query = "select u from Utilisateur u"),  //Liste de tous les utilisateurs
         @NamedQuery(name = "utilisateur_id", query = "select u from Utilisateur u where u.id = :idUtil"), //Utilisateur selon son id
         @NamedQuery(name = "utilisateur_login",query = "select u from Utilisateur u where u.login = :login"), //Utilisateur selon son Login
-        @NamedQuery(name = "utilisateur_connexion", query = "select u from Utilisateur u where u.login = :login and u.mdp = :mdp") //Utilisateur selon son Login et son Mdp
+        @NamedQuery(name = "utilisateur_connexion", query = "select u from Utilisateur u where u.login = :login and u.mdp = :mdp"),//Utilisateur selon son Login et son Mdp
+        @NamedQuery(name = "utilisateurs_dispos", query = "select u from Utilisateur u where u.disponible = true")
 })
 @Table(name = "utilisateurs")
 public class Utilisateur implements Serializable {
@@ -32,6 +33,9 @@ public class Utilisateur implements Serializable {
 
     @Column(name = "sel")
     private byte[] sel;
+
+    @Column(name = "Disponible")
+    private boolean disponible;
 
     //Accesseurs en écriture et en lecture
     public byte[] getSel() {
@@ -64,5 +68,13 @@ public class Utilisateur implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }

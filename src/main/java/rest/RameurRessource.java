@@ -109,4 +109,10 @@ public class RameurRessource {
         //System.out.println(valeur);
         return valeur;
     }
+
+    @DELETE
+    @Consumes("text/plain")
+    public void deleteRameur(String id){
+        sb.deleteRameur(id);
+    }
 }

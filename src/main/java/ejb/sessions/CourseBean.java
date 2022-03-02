@@ -1,15 +1,21 @@
 package ejb.sessions;
 
+import ejb.entities.Utilisateur;
 import ejb.message.Defis;
 import ejb.message.ListDefis;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jms.JMSException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 public class CourseBean {
-    ListDefis ld;
+    @EJB
+    private ManagerBeanLocal mb;
+
+    private ListDefis ld;
 
     public CourseBean(){
         ld = ListDefis.getInstance();
@@ -24,8 +30,17 @@ public class CourseBean {
         return ld.getDefis(idUtil);
     }
 
-    public List<Integer> getUtil(){
-        return ld.getUtil();
+    public List<Utilisateur> getUtilisateursDispos()
+    {
+        List<Integer> listeIdDispos = ld.getUtil();
+
+        List<Utilisateur> listeUtilisateursDispos = new ArrayList<>();
+        for(int i=0; i<listeIdDispos.size(); i++)
+        {
+            listeUtilisateursDispos.add(mb.getUtilisateur(listeIdDispos.get(i)));
+        }
+
+        return listeUtilisateursDispos;
     }
 
     public void addUtilDispo(int id){

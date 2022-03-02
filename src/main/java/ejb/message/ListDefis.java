@@ -3,6 +3,7 @@ package ejb.message;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: ajouter un sémaphore sur la classe ?
 public class ListDefis {
     private static ListDefis instance;
     List<Defis> ld;

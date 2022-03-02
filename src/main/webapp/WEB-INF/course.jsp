@@ -33,13 +33,18 @@
                     <fieldset>
                         <legend>Choisissez votre rameur:</legend>
                         <div class="scrollable-list">
-                            <!--TODO: lier le formulaire-->
-                            <form id="form-rameurs">
+                            <!--TODO: afficher le numéro du rameur choisi-->
+                            <form id="form-rameurs" action="choixRameur", method="post">
                                 <ul>
                                     <c:choose>
                                         <c:when test="${pasDeRameur}">
                                             <li style="color: #c0001a">
                                                 Aucun rameur disponible pour le moment
+                                            </li>
+                                        </c:when>
+                                        <c:when test="${rameurChoisi != null}">
+                                            <li style="color: #c0001a">
+                                                Vous avez choisi le rameur n°${rameurChoisi}
                                             </li>
                                         </c:when>
                                         <c:otherwise>
@@ -85,7 +90,6 @@
                         <!--TODO: Lier le formulaire-->
                         <form>
                             <ul>
-                                <!--TODO: afficher les utilisateurs disponibles pour une course-->
                                 <c:choose>
                                     <c:when test="${pasDAdversaire}">
                                         <li style="color: #c0001a">

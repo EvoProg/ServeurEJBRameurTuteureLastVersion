@@ -69,4 +69,6 @@ public class ChoixRameurControleur extends HttpServlet
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
     }
+
+
 }

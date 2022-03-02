@@ -50,7 +50,7 @@
                                         <c:otherwise>
                                             <c:forEach items="${rameurs}" var="rameur">
                                                 <li>
-                                                    <input type="radio" id="radio-choix-rameur${rameur.getId()}" name="radio-choix-rameur" required>
+                                                    <input type="radio" id="radio-choix-rameur${rameur.getId()}" name="radio-choix-rameur" value="${rameur.getId()}" required>
                                                     <label for="radio-choix-rameur${rameur.getId()}">Rameur n°${rameur.getId()}</label>
                                                 </li>
                                             </c:forEach>

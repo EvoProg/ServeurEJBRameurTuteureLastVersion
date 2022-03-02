@@ -14,10 +14,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.Serializable;
 
 @Stateless
 @Path("/donneeJson")
-public class DonneeRessourceJson {
+public class DonneeRessourceJson{
     @EJB
     private ManagerBeanLocal mg;
 

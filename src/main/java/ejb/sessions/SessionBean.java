@@ -49,7 +49,7 @@ public class SessionBean implements SessionBeanLocal{
             rameurs = q.getResultList();
         }catch (Exception e){
             //Si les rameurs n'existent pas
-            System.out.println("Erreur dans getListeRameurs connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getListeRameurs connection BD : "+e.getMessage());
         }
 
         return rameurs;
@@ -67,7 +67,7 @@ public class SessionBean implements SessionBeanLocal{
             rameurs = q.getResultList();
         }catch (Exception e){
             //Si les rameurs n'existent pas
-            System.out.println("Erreur dans getListeRameursAttente connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getListeRameursAttente connection BD : "+e.getMessage());
         }
 
         return rameurs;
@@ -87,7 +87,7 @@ public class SessionBean implements SessionBeanLocal{
             rameur = (Rameur) q.getSingleResult();
         }catch (Exception e){
             //Si le rameur n'existe pas
-            System.out.println("Erreur dans getRameur connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getRameur connection BD : "+e.getMessage());
         }
 
         return rameur;

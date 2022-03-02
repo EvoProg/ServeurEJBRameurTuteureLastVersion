@@ -54,7 +54,7 @@ public class ConnectionBean implements ConnectionBeanLocal{
             utilisateur = (Utilisateur) q.getSingleResult();
         }catch (Exception e) {
             //Si l'utilisateur n'existe pas
-            System.out.println("Erreur dans verifyUtilisateur connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans verifyUtilisateur connection BD : "+e.getMessage());
         }
         return utilisateur;
     }

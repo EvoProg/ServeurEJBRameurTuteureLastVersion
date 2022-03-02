@@ -137,7 +137,7 @@
                         <th>Numéro de la session</th>
                         <th>Date de la session</th>
                         <th>Temps en seconde</th>
-                        <th>Distance en centimètre</th>
+                        <th>Distance en décimètre</th>
                         <th>Coups par minute</th>
                         <th>Puissance en watt</th>
                         <th>Rythme</th>

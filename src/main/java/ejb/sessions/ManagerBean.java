@@ -7,6 +7,7 @@ import ejb.entities.Utilisateur;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,13 +15,7 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-    Les EJB session stateful sont capables de conserver l'état du bean dans des variables d'instance
-    durant toute la conversation avec un client. Mais ces données ne sont pas persistantes : à la fin
-    de l'échange avec le client, l'instance de l'EJB est détruite et les données sont perdues.
- */
-
-@Stateful
+@Stateless
 public class ManagerBean implements ManagerBeanLocal{
     //Déclaration des variables
     //Variable correspondant à une unité de persistance définie dans le fichier persistence.xml
@@ -49,7 +44,7 @@ public class ManagerBean implements ManagerBeanLocal{
             performances = q.getResultList();
         }catch (Exception e){
             //Si les performances n'existent pas
-            System.out.println("Erreur dans getListeToutePerformances connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getListeToutePerformances connection BD : "+e.getMessage());
         }
 
         return performances;
@@ -69,7 +64,7 @@ public class ManagerBean implements ManagerBeanLocal{
             performances = q.getResultList();
         }catch (Exception e){
             //Si les performances n'existe pas
-            System.out.println("Erreur dans getListePerformancesParUtilisateur connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getListePerformancesParUtilisateur connection BD : "+e.getMessage());
         }
 
         return performances;
@@ -90,7 +85,7 @@ public class ManagerBean implements ManagerBeanLocal{
             performances = q.getResultList();
         }catch (Exception e){
             //Si les performances n'existe pas
-            System.out.println("Erreur dans getListePerformancesParUtilisateurSession connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans getListePerformancesParUtilisateurSession connection BD : "+e.getMessage());
         }
 
         return performances;
@@ -163,7 +158,7 @@ public class ManagerBean implements ManagerBeanLocal{
             utilisateur = (Utilisateur) q.getSingleResult();
         }catch (Exception e) {
             //Si l'utilisateur n'existe pas
-            System.out.println("Erreur dans verifyUtilisateur connection BD : "+e.getMessage());
+            //System.out.println("Erreur dans verifyUtilisateur connection BD : "+e.getMessage());
         }
 
         return utilisateur;

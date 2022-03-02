@@ -40,7 +40,7 @@ public class CourseControleur extends HttpServlet
         }
 
         //Récupération de la liste des utilisateurs disponibles pour une course
-        List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
+        List<Integer> utilisateursDispos = cb.getUtil();
 
         if(utilisateursDispos.size() > 0)
         {

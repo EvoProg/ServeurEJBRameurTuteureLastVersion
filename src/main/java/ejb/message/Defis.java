@@ -16,6 +16,8 @@ public class Defis implements Serializable {
         this.idUtilDefier = idUtilDefier;
         this.distanceCourse = distanceCourse;
         this.idRameurDefieur = idRameurDefieur;
+        this.tempsDefier = 0;
+        this.tempsDefieur = 0;
     }
 
     public int getIdRameurDefieur() {

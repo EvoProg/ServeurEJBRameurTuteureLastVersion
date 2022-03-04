@@ -78,4 +78,52 @@ public class CourseBean {
         ld.supprUtil(d.getIdRameurDefier());
         ld.supprDefis(d);
     }
+
+    public String ajoutTempsEtAfficheResultat(int temps, Defis d, int idUtil) throws InterruptedException {
+        //cas ou l'utilisateur envoie ses résultats en dernier
+        if(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier())!= null)
+        {
+            if(idUtil == d.getIdUtilDefieur()){
+                ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).setTempsDefieur(temps);
+            }
+            if(idUtil == d.getIdUtilDefier()){
+                ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).setTempsDefier(temps);
+            }
+            return resultatCourse(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()), idUtil);
+        }
+        //cas ou l'utilisateur envoie ses résultats en dernier
+        else{
+            if(idUtil == d.getIdUtilDefieur()){
+                d.setTempsDefieur(temps);
+            }
+            if(idUtil == d.getIdUtilDefier()){
+                d.setTempsDefier(temps);
+            }
+            ld.addDefis(d);
+            while(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).getTempsDefier() == 0 || ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).getTempsDefieur() == 0){
+                Thread.sleep(1000);
+            }
+            return resultatCourse(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()), idUtil);
+        }
+    }
+
+    public String resultatCourse(Defis d, int idutil){
+        if(idutil == d.getIdUtilDefieur()){
+            if(d.getTempsDefier()>d.getTempsDefieur()){
+                return "vous avez perdu";
+            }
+            else{
+                return "vous avez gagné";
+            }
+        }
+        if(idutil == d.getIdRameurDefier()){
+            if(d.getTempsDefieur()>d.getTempsDefier()){
+                return "vous avez perdu";
+            }
+            else{
+                return "vous avez gagné";
+            }
+        }
+        return "erreur";
+    }
 }

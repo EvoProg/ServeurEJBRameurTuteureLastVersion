@@ -11,10 +11,11 @@ public class Defis implements Serializable {
     private int idRameurDefieur;
     private int idRameurDefier;
 
-    public Defis(int idUtilDefieur, int idUtilDefier, int distanceCourse) {
+    public Defis(int idUtilDefieur, int idUtilDefier, int distanceCourse, int idRameurDefieur) {
         this.idUtilDefieur = idUtilDefieur;
         this.idUtilDefier = idUtilDefier;
         this.distanceCourse = distanceCourse;
+        this.idRameurDefieur = idRameurDefieur;
     }
 
     public int getIdRameurDefieur() {

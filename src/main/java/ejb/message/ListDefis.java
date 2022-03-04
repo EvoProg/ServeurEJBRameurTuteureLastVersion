@@ -48,4 +48,21 @@ public class ListDefis {
         }
         return ldt;
     }
+
+    public synchronized Defis getDefi(int idDefieur, int idDefier){
+        for(int i = 0 ; i< ld.size();i++){
+            if(ld.get(i).getIdUtilDefier() == idDefier && ld.get(i).getIdUtilDefieur() == idDefieur) return ld.get(i);
+        }
+        return null;
+    }
+
+    public synchronized void ajouteIdRameur(int idDefieur, int idDefier, int idRameur){
+        for(int i = 0 ; i< ld.size();i++){
+            if(ld.get(i).getIdUtilDefier() == idDefier && ld.get(i).getIdUtilDefieur() == idDefieur) ld.get(i).setIdRameurDefier(idRameur);
+        }
+    }
+
+    public synchronized void supprDefis(Defis d){
+        ld.remove(d);
+    }
 }

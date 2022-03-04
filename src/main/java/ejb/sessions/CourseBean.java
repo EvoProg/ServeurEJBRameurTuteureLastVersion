@@ -21,8 +21,8 @@ public class CourseBean {
         ld = ListDefis.getInstance();
     }
 
-    public void lancerDefis(int Distance, int idAdversaire, int idUtil){
-        Defis d = new Defis(idUtil,idAdversaire,Distance);
+    public void lancerDefis(int Distance, int idAdversaire, int idUtil, int idRameur){
+        Defis d = new Defis(idUtil,idAdversaire,Distance, idRameur);
         ld.addDefis(d);
     }
 

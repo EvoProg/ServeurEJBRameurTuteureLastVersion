@@ -26,7 +26,7 @@ public class CourseBean {
         ld.addDefis(d);
     }
 
-    public List<Defis> recevoirDefis(int idUtil) throws JMSException, InterruptedException {
+    public List<Defis> recevoirDefis(int idUtil){
         return ld.getDefis(idUtil);
     }
 

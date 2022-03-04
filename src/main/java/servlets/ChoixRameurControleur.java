@@ -2,6 +2,7 @@ package servlets;
 
 import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
+import ejb.message.Defis;
 import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
 
@@ -35,6 +36,8 @@ public class ChoixRameurControleur extends HttpServlet
     {
         request.setAttribute("courses", true);
 
+        HttpSession session = request.getSession();
+
         //Récupération de la liste des rameurs disponibles
         /*List<Rameur> rameurs = sb.getListeRameursAttente(0);
         if(rameurs.size() > 0)
@@ -46,10 +49,9 @@ public class ChoixRameurControleur extends HttpServlet
         {
             request.setAttribute("pasDeRameur", true);
         }*/
-        String idRameur = request.getParameter("radio-choix-rameur");
-        request.setAttribute("rameurChoisi", idRameur);
+        int idRameur = Integer.parseInt(request.getParameter("radio-choix-rameur"));
+        session.setAttribute("rameurChoisi", idRameur);
 
-        HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
         cb.addUtilDispo(utilisateur.getId());
 
@@ -65,6 +67,17 @@ public class ChoixRameurControleur extends HttpServlet
         else
         {
             request.setAttribute("pasDAdversaire", true);
+        }
+
+        List<Defis> defis = cb.recevoirDefis(utilisateur.getId());
+        if(defis.size() > 0)
+        {
+            request.setAttribute("defis", defis);
+            request.setAttribute("pasDeDefis", false);
+        }
+        else
+        {
+            request.setAttribute("pasDeDefis", true);
         }
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);

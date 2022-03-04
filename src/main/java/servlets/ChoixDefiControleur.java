@@ -7,14 +7,17 @@ import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CourseControleur", value = "/CourseControleur")
-public class CourseControleur extends HttpServlet
+@WebServlet(name = "ChoixDefiControleur", value = "/choixDefi")
+public class ChoixDefiControleur extends HttpServlet
 {
     @EJB
     private SessionBeanLocal sb;
@@ -25,31 +28,37 @@ public class CourseControleur extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         request.setAttribute("courses", true);
 
-        HttpSession session = request.getSession();
+        /*HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
+        int idUtilisateur = utilisateur.getId();
 
-        //Si l'utilisateur n'a pas déjà choisi un rameur
-        if(session.getAttribute("rameurChoisi") == null)
-        {
-            //Récupération de la liste des rameurs disponibles
-            List<Rameur> rameurs = sb.getListeRameursAttente(0);
-            if(rameurs.size() > 0)
-            {
-                request.setAttribute("rameurs", rameurs);
-                request.setAttribute("pasDeRameur", false);
-            }
-            else
-            {
-                request.setAttribute("pasDeRameur", true);
-            }
-        }
+        int idAdversaire = Integer.parseInt(request.getParameter("radio-choix-adversaire"));
+        cb.supprUtilDispo(idAdversaire);
 
-
+        int distance = Integer.parseInt(request.getParameter("inputDistance"));
+        cb.lancerDefis(idUtilisateur, idAdversaire, distance);
 
         //Récupération de la liste des utilisateurs disponibles pour une course
         List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
+
+        List<Rameur> rameurs = sb.getListeRameursAttente(0);
+        if(rameurs.size() > 0)
+        {
+            request.setAttribute("rameurs", rameurs);
+            request.setAttribute("pasDeRameur", false);
+        }
+        else
+        {
+            request.setAttribute("pasDeRameur", true);
+        }
 
         if(utilisateursDispos.size() > 0)
         {
@@ -61,7 +70,7 @@ public class CourseControleur extends HttpServlet
             request.setAttribute("pasDAdversaire", true);
         }
 
-        List<Defis> defis = cb.recevoirDefis(utilisateur.getId());
+        List<Defis> defis = cb.recevoirDefis(idUtilisateur);
         if(defis.size() > 0)
         {
             request.setAttribute("defis", defis);
@@ -70,17 +79,12 @@ public class CourseControleur extends HttpServlet
         else
         {
             request.setAttribute("pasDeDefis", true);
-        }
+        }*/
+
+
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        /*int Distance = Integer.parseInt(request.getParameter("Distance"));
-        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
-        cb.init(utilisateur.getId());
-        cb.lancerDefis(Distance,0);*/
-    }
+
 }

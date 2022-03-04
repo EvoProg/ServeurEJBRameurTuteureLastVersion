@@ -24,7 +24,7 @@ public class CourseBean {
         ld = ListDefis.getInstance();
     }
 
-    public void lancerDefis(int Distance, int idAdversaire, int idUtil, int idRameur){
+    public void lancerDefis(int idUtil, int idAdversaire, int Distance, int idRameur){
         Defis d = new Defis(idUtil,idAdversaire,Distance, idRameur);
         ld.addDefis(d);
         ld.supprUtil(idUtil);
@@ -47,11 +47,13 @@ public class CourseBean {
         return listeUtilisateursDispos;
     }
 
-    public void addUtilDispo(int id){
+    public void addUtilDispo(int id)
+    {
         ld.addUtil(id);
     }
 
-    public void supprUtilDispo(int id){
+    public void supprUtilDispo(int id)
+    {
         ld.supprUtil(id);
     }
 
@@ -91,7 +93,7 @@ public class CourseBean {
             }
             return resultatCourse(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()), idUtil);
         }
-        //cas ou l'utilisateur envoie ses résultats en dernier
+        //cas ou l'utilisateur envoie ses résultats en premier
         else{
             if(idUtil == d.getIdUtilDefieur()){
                 d.setTempsDefieur(temps);

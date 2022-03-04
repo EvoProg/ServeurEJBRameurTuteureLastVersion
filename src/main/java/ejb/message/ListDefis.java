@@ -26,12 +26,15 @@ public class ListDefis {
         System.out.println("dans list defis: "+ld.size());
     }
 
-    public synchronized void addUtil(int id){
-        lud.add(id);
+    public synchronized void addUtil(int id)
+    {
+        //Si l'id n'est pas déjà dans la liste
+        if(!lud.contains(id))
+            lud.add(id);
     }
 
     public synchronized void supprUtil(int id){
-        lud.remove(id);
+        lud.remove((Integer) id);
     }
 
     public synchronized List<Integer> getUtil(){

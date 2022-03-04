@@ -34,7 +34,7 @@
                         <legend>Choisissez votre rameur:</legend>
                         <div class="scrollable-list">
                             <!--TODO: afficher le numéro du rameur choisi-->
-                            <form id="form-rameurs" action="choixRameur", method="post">
+                            <form id="form-rameurs" action="choixRameur" method="post">
                                 <ul>
                                     <c:choose>
                                         <c:when test="${pasDeRameur}">
@@ -42,7 +42,7 @@
                                                 Aucun rameur disponible pour le moment
                                             </li>
                                         </c:when>
-                                        <c:when test="${rameurChoisi != null}">
+                                        <c:when test="${sessionScope.rameurChoisi != null}">
                                             <li style="color: #c0001a">
                                                 Vous avez choisi le rameur n°${rameurChoisi}
                                             </li>
@@ -82,13 +82,15 @@
             <div id="div-course-partie-droite">
                 <!--Partie choix du type de course-->
                 <div id="div-choix-adversaire">
-                    <button id="bouton-maj-adversaires">Rafraîchir</button>
+                    <form action="CourseControleur" method="get">
+                        <button id="bouton-maj-adversaires">Rafraîchir</button>
+                    </form>
+
 
                     <fieldset>
                         <legend>Liste des adversaires disponibles:</legend>
 
-                        <!--TODO: Lier le formulaire-->
-                        <form>
+                        <form id="form-adversaires" action="choixAdversaire" method="post">
                             <ul>
                                 <c:choose>
                                     <c:when test="${pasDAdversaire}">
@@ -99,7 +101,7 @@
                                     <c:otherwise>
                                         <c:forEach items="${utilisateursDispos}" var="utilisateur">
                                             <li>
-                                                <input type="radio" id="radio-choix-adversaire${utilisateur.getId()}" name="radio-choix-adversaire" required>
+                                                <input type="radio" id="radio-choix-adversaire${utilisateur.getId()}" name="radio-choix-adversaire" value="${utilisateur.getId()}" required>
                                                 <label for="radio-choix-adversaire${utilisateur.getId()}">${utilisateur.getLogin()}</label>
                                             </li>
                                         </c:forEach>
@@ -107,20 +109,42 @@
                                 </c:choose>
                             </ul>
                             <label for="inputDistance">Choisissez la distance à parcourir (mètres)</label>
-                            <input id="inputDistance" type="number" min="100" required>
+                            <input id="inputDistance" name="inputDistance" type="number" min="100" required>
 
-                            <button id="bouton-valider-distance" value="valider-distance" type="submit">Valider</button>
+                            <button form="form-adversaires" id="bouton-valider-distance" type="submit">Valider adversaire</button>
                         </form>
                     </fieldset>
                 </div>
 
                 <div id="div-notifs-course">
-                    <!--TODO: Lier le formulaire-->
-                    <form>
-                        <fieldset>
-                            <legend>Liste des défis reçus:</legend>
-                        </fieldset>
-                    </form>
+
+                    <fieldset>
+                        <legend>Liste des défis reçus:</legend>
+
+                        <!--TODO: Lier le formulaire-->
+                        <form action="choixDefi" method="post">
+                            <ul>
+                                <c:choose>
+                                    <c:when test="${pasDeDefis}">
+                                        <li style="color: #c0001a">
+                                            Vous n'avez pas été défié pour le moment
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach items="${defis}" var="defi">
+                                            <li>
+                                                <!--TODO: ajouter une méthode dans Defi pour récupérer directement un utilisateur et pas seulement son ID-->
+                                                <input type="radio" id="radio-choix-defi${defi.getIdUtilDefieur()}" name="radio-choix-defi" value="${defi}" required>
+                                                <label for="radio-choix-defi${defi.getIdUtilDefieur()}">${defi.getIdUtilDefieur()} : ${defi.getDistanceCourse()}m</label>
+                                            </li>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </ul>
+
+                            <button id="bouton-accepter-defi" type="submit">Valider défi</button>
+                        </form>
+                    </fieldset>
                 </div>
             </div>
         </div>

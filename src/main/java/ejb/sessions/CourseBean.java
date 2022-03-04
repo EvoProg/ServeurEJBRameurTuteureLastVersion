@@ -15,6 +15,9 @@ public class CourseBean {
     @EJB
     private ManagerBeanLocal mb;
 
+    @EJB
+    private SessionBeanLocal sb;
+
     private ListDefis ld;
 
     public CourseBean(){
@@ -24,6 +27,7 @@ public class CourseBean {
     public void lancerDefis(int Distance, int idAdversaire, int idUtil, int idRameur){
         Defis d = new Defis(idUtil,idAdversaire,Distance, idRameur);
         ld.addDefis(d);
+        ld.supprUtil(idUtil);
     }
 
     public List<Defis> recevoirDefis(int idUtil){
@@ -49,5 +53,29 @@ public class CourseBean {
 
     public void supprUtilDispo(int id){
         ld.supprUtil(id);
+    }
+
+    public void lancerCourse(Defis d, int idRameur){
+        d.setIdRameurDefier(idRameur);
+        sb.updateRameur(
+                d.getIdRameurDefier(),
+                "distance",
+                d.getDistanceCourse(),
+                d.getIdUtilDefier(),
+                mb.getDerniereSession(d.getIdUtilDefier())+1,
+                0,
+                0
+        );
+        sb.updateRameur(
+                d.getIdRameurDefieur(),
+                "distance",
+                d.getDistanceCourse(),
+                d.getIdRameurDefieur(),
+                mb.getDerniereSession(d.getIdUtilDefieur())+1,
+                0,
+                0
+        );
+        ld.supprUtil(d.getIdRameurDefier());
+        ld.supprDefis(d);
     }
 }

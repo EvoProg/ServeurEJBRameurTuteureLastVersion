@@ -36,7 +36,22 @@ public class ChoixDefiControleur extends HttpServlet
     {
         request.setAttribute("courses", true);
 
-        /*HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+        int idRameur = (Integer)session.getAttribute("rameurChoisi");
+
+        String idsDefi = request.getParameter("radio-choix-defi");
+        String[] ids = idsDefi.split(",");
+        int idDefieur = Integer.parseInt(ids[0]);
+        int idDefie = Integer.parseInt(ids[1]);
+
+        Defis defi = cb.getDefi(idDefieur, idDefie);
+
+        System.out.println(idDefieur + "==============" + idDefie);
+        cb.lancerCourse(defi, idRameur);
+
+
+        /*
+        HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
         int idUtilisateur = utilisateur.getId();
 
@@ -79,7 +94,8 @@ public class ChoixDefiControleur extends HttpServlet
         else
         {
             request.setAttribute("pasDeDefis", true);
-        }*/
+        }
+        */
 
 
 

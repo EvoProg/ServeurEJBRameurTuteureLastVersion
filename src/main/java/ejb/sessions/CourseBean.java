@@ -112,4 +112,9 @@ public class CourseBean {
         }
         return "erreur";
     }
+
+    public Defis getDefi(int idDefieur, int idDefie)
+    {
+        return ld.getDefi(idDefieur, idDefieur);
+    }
 }

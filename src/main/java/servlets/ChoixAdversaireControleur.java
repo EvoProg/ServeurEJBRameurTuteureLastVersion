@@ -34,10 +34,6 @@ public class ChoixAdversaireControleur extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        System.out.println("=========================================");
-        System.out.println("test choixadversairecontroleur");
-        System.out.println("=========================================");
-
         request.setAttribute("courses", true);
 
         HttpSession session = request.getSession();
@@ -52,18 +48,9 @@ public class ChoixAdversaireControleur extends HttpServlet
         cb.lancerDefis(idUtilisateur, idAdversaire, distance, idRameurChoisi);
 
         //Récupération de la liste des utilisateurs disponibles pour une course
-        List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
+        /*List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
 
-        /*List<Rameur> rameurs = sb.getListeRameursAttente(0);
-        if(rameurs.size() > 0)
-        {
-            request.setAttribute("rameurs", rameurs);
-            request.setAttribute("pasDeRameur", false);
-        }
-        else
-        {
-            request.setAttribute("pasDeRameur", true);
-        }*/
+
         //Si l'utilisateur n'a pas déjà choisi un rameur
         if(session.getAttribute("rameurChoisi") == null)
         {
@@ -84,18 +71,10 @@ public class ChoixAdversaireControleur extends HttpServlet
         {
             request.setAttribute("utilisateursDispos", utilisateursDispos);
             request.setAttribute("pasDAdversaire", false);
-
-            System.out.println("=========================================");
-            System.out.println(utilisateursDispos);
-            System.out.println("=========================================");
         }
         else
         {
             request.setAttribute("pasDAdversaire", true);
-
-            System.out.println("=========================================");
-            System.out.println("null");
-            System.out.println("=========================================");
         }
 
         List<Defis> defis = cb.recevoirDefis(idUtilisateur);
@@ -107,11 +86,11 @@ public class ChoixAdversaireControleur extends HttpServlet
         else
         {
             request.setAttribute("pasDeDefis", true);
-        }
+        }*/
 
 
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
     }
 
 

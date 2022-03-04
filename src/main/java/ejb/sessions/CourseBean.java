@@ -78,35 +78,19 @@ public class CourseBean {
                 0
         );
         ld.supprUtil(d.getIdRameurDefier());
-        ld.supprDefis(d);
     }
 
     public String ajoutTempsEtAfficheResultat(int temps, Defis d, int idUtil) throws InterruptedException {
-        //cas ou l'utilisateur envoie ses résultats en dernier
-        if(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier())!= null)
-        {
-            if(idUtil == d.getIdUtilDefieur()){
-                ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).setTempsDefieur(temps);
-            }
-            if(idUtil == d.getIdUtilDefier()){
-                ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).setTempsDefier(temps);
-            }
-            return resultatCourse(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()), idUtil);
+        if(idUtil == d.getIdUtilDefieur()){
+            d.setTempsDefieur(temps);
         }
-        //cas ou l'utilisateur envoie ses résultats en premier
-        else{
-            if(idUtil == d.getIdUtilDefieur()){
-                d.setTempsDefieur(temps);
-            }
-            if(idUtil == d.getIdUtilDefier()){
-                d.setTempsDefier(temps);
-            }
-            ld.addDefis(d);
-            while(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).getTempsDefier() == 0 || ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()).getTempsDefieur() == 0){
-                Thread.sleep(1000);
-            }
-            return resultatCourse(ld.getDefi(d.getIdUtilDefieur(),d.getIdUtilDefier()), idUtil);
+        if(idUtil == d.getIdUtilDefier()){
+            d.setTempsDefier(temps);
         }
+        while(d.getTempsDefieur() == 0 || d.getTempsDefier() == 0){
+            Thread.sleep(1000);
+        }
+        return resultatCourse(d , idUtil);
     }
 
     public String resultatCourse(Defis d, int idutil){

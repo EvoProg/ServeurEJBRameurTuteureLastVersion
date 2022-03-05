@@ -144,6 +144,7 @@
 
                             <button id="bouton-accepter-defi" type="submit">Valider défi</button>
                         </form>
+                        <a href="AnimationControleur">Test animation</a>
                     </fieldset>
                 </div>
             </div>

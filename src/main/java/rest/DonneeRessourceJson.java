@@ -16,7 +16,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
-@Stateless
 @Path("/donneeJson")
 public class DonneeRessourceJson{
     @EJB

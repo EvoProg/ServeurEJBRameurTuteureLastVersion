@@ -18,7 +18,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
-@Stateless
 @Path("/ressource")
 public class RameurRessource {
     //Déclaration des variables

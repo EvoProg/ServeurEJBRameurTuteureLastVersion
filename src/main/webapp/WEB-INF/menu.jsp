@@ -141,7 +141,7 @@
                         <th>Coups par minute</th>
                         <th>Puissance en watt</th>
                         <th>Rythme</th>
-                        <th>Calories perdues</th>
+                        <th>Calories perdues en Kcal</th>
                         <th>Frequence en btmp</th>
                     </tr>
                 </thead>

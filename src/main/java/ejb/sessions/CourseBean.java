@@ -1,12 +1,11 @@
 package ejb.sessions;
 
 import ejb.entities.Utilisateur;
-import ejb.message.Defis;
-import ejb.message.ListDefis;
+import ejb.objects.Defis;
+import ejb.objects.ListDefis;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jms.JMSException;
 import java.util.ArrayList;
 import java.util.List;
 

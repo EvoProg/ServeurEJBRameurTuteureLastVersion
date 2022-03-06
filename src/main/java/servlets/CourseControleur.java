@@ -2,7 +2,7 @@ package servlets;
 
 import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
-import ejb.message.Defis;
+import ejb.objects.Defis;
 import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
 

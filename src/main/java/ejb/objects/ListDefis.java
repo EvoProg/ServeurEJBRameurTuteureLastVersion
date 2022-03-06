@@ -1,4 +1,4 @@
-package ejb.message;
+package ejb.objects;
 
 import java.util.ArrayList;
 import java.util.List;

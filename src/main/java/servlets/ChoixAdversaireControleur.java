@@ -1,8 +1,6 @@
 package servlets;
 
-import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
-import ejb.message.Defis;
 import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
 
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "ChoixAdversaireControleur", value = "/choixAdversaire")
 public class ChoixAdversaireControleur extends HttpServlet

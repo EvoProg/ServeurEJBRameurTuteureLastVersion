@@ -1,7 +1,7 @@
 package servlets;
 
 import ejb.entities.Utilisateur;
-import stats.Graphiques;
+import stats.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

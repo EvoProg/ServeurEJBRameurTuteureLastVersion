@@ -29,7 +29,7 @@ public class RameurRessource {
     @Path("/identifiant")
     @GET
     @Produces("text/plain")
-    public String getIdentifiantRameur(){
+    public synchronized String getIdentifiantRameur(){
         String identifiant = "";
         int id = sb.getDernierIdRameur();
         identifiant += id;
@@ -41,7 +41,7 @@ public class RameurRessource {
     @Path("/ajoutRameur")
     @PUT
     @Produces("text/plain")
-    public void addRameur(String idRameur){
+    public synchronized void addRameur(String idRameur){
         //Variables
         int identifiantRameur, valeurRameur;
 
@@ -57,7 +57,7 @@ public class RameurRessource {
     @Path("/type")
     @PUT
     @Produces("text/plain")
-    public String getRameurSessionType(String idRameur) {
+    public synchronized String getRameurSessionType(String idRameur) {
         //Variables
         int identifiantRameur = Integer.parseInt(idRameur);;
         String type = "";
@@ -83,7 +83,7 @@ public class RameurRessource {
     @Path("/valeur")
     @PUT
     @Produces("text/plain")
-    public String getRameurSessionValeur(String idRameur) {
+    public synchronized String getRameurSessionValeur(String idRameur) {
         //Variables
         String valeur = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -114,7 +114,7 @@ public class RameurRessource {
     @Path("/repos")
     @PUT
     @Produces("text/plain")
-    public String getRameurSessionRepos(String idRameur) {
+    public synchronized String getRameurSessionRepos(String idRameur) {
         //Variables
         String repos = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -145,7 +145,7 @@ public class RameurRessource {
     @Path("/repetition")
     @PUT
     @Produces("text/plain")
-    public String getRameurSessionRepetition(String idRameur) {
+    public synchronized String getRameurSessionRepetition(String idRameur) {
         //Variables
         String repetition = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -174,7 +174,7 @@ public class RameurRessource {
 
     @DELETE
     @Consumes("text/plain")
-    public void deleteRameur(String id){
+    public synchronized void deleteRameur(String id){
         sb.deleteRameur(id);
     }
 }

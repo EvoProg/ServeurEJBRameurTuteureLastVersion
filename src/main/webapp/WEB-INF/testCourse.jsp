@@ -8,9 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Projet Tutoré - Course Attente</title>
+    <link rel="stylesheet" href="CSS/menu_operation.css">
 </head>
 <body>
-    <p>Défi envoyé : attente de l'adversaire...</p>
+    <!--Affichage de la barre de navigation sur la gauche de la page-->
+    <%@include file="navigation.jsp" %>
+
+    <!--Affichage du nom de la page ainsi que du bouton de déconnexion-->
+    <%@include file="deconnexion.jsp"%>
+
+    <br>
+
+    <section class="options">
+        <p>Défi envoyé : attente de l'adversaire...</p>
+    </section>
+
 </body>
 </html>

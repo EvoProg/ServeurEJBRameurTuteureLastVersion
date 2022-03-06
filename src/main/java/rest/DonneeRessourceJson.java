@@ -25,7 +25,7 @@ public class DonneeRessourceJson{
     @PUT
     @Consumes("text/plain")
     @Produces("text/plain")
-    public void putDonnee(String jo){
+    public synchronized void putDonnee(String jo){
         //System.out.println(jo);
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();

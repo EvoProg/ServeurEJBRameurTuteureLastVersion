@@ -34,6 +34,5 @@ public interface SessionBeanLocal {
     public void deleteRameur(String idRameur);
 
     //TODO vérifier si cela fonctionne bien dans le temps
-    @PostConstruct
     public void deleteAllRameur();
 }

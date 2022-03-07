@@ -17,6 +17,10 @@
 
 </head>
 <body>
+    <form action="resultatCourse" method="post">
+        <button type="submit">Afficher résultat</button>
+    </form>
+
     <h1>Animation test</h1>
     <div id="scene-container"></div>
 </body>

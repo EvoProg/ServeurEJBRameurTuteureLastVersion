@@ -4,6 +4,7 @@ import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
 import ejb.objects.Defis;
 import ejb.sessions.CourseBean;
+import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
 import stats.SimilarCos;
 
@@ -12,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "CourseControleur", value = "/CourseControleur")
@@ -22,6 +24,9 @@ public class CourseControleur extends HttpServlet
 
     @EJB
     private CourseBean cb;
+
+    @EJB
+    private ManagerBeanLocal mg;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -82,8 +87,19 @@ public class CourseControleur extends HttpServlet
         HttpSession session = request.getSession();
         Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
         int idUtil = utilisateur.getId();
+        System.out.println(idUtil);
         SimilarCos conseil = new SimilarCos(idUtil);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
+        List<Integer> utilisateurs = conseil.getListeUserConseil();
+        List<String> utils = new ArrayList<>();
+        for (int i = 0; i < utilisateurs.size(); i++) {
+            utils.add(mg.getUtilisateur(utilisateurs.get(i)).getLogin());
+        }
+
+        for (int i = 0; i < utils.size(); i++) {
+            System.out.println(utils.get(i));
+        }
+        request.setAttribute("utilisateurs",utils);
+        this.doGet(request, response);
 
         /*int Distance = Integer.parseInt(request.getParameter("Distance"));
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");

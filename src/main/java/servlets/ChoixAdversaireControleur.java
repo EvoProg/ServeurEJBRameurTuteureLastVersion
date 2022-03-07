@@ -53,6 +53,7 @@ public class ChoixAdversaireControleur extends HttpServlet
         int idRameurChoisi = (Integer)session.getAttribute("rameurChoisi");
         cb.lancerDefis(idUtilisateur, idAdversaire, distance, idRameurChoisi);
         Defis defi = cb.getDefi(idUtilisateur, idAdversaire);
+        session.setAttribute("defi", defi);
 
         while(!defi.isAccepte()){
             try {
@@ -64,19 +65,12 @@ public class ChoixAdversaireControleur extends HttpServlet
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/animation.jsp").forward(request,response);
 
-        while(sb.getRameur(idRameurChoisi).getValeur() != 0)
-        {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
 
         List<Performance> performances = mb.getListeDernieresPerformances(idUtilisateur);
 
 
-        String res = "";
+        /*String res = "";
         try {
             res = cb.ajoutTempsEtAfficheResultat(performances.get(performances.size()-1).getTempsCs(), defi, idUtilisateur);
         } catch (InterruptedException e) {
@@ -86,7 +80,7 @@ public class ChoixAdversaireControleur extends HttpServlet
         {
             System.out.println("résultat vide");
         }
-        request.setAttribute("resultat", res);
+        request.setAttribute("resultat", res);*/
 
         //Récupération de la liste des utilisateurs disponibles pour une course
         /*List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();
@@ -131,7 +125,7 @@ public class ChoixAdversaireControleur extends HttpServlet
 
 
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
+        //this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
     }
 
 

@@ -102,19 +102,19 @@ public class CourseBean {
         if(idutil == d.getIdUtilDefieur()){
             System.out.println("je suis dans le Defieur");
             if(d.getTempsDefier()<d.getTempsDefieur()){
-                return "vous avez perdu "+d.getTempsDefieur();
+                return "vous avez perdu avec un temps de "+(d.getTempsDefieur()/100)+"s";
             }
             else{
-                return "vous avez gagné "+d.getTempsDefieur();
+                return "vous avez gagné avec un temps de "+(d.getTempsDefieur()/100)+"s";
             }
         }
         if(idutil == d.getIdUtilDefier()){
             System.out.println("je suis dans le Defier");
             if(d.getTempsDefieur()<d.getTempsDefier()){
-                return "vous avez perdu "+d.getTempsDefier();
+                return "vous avez perdu avec un temps de "+(d.getTempsDefier()/100)+"s";
             }
             else{
-                return "vous avez gagné "+d.getTempsDefier();
+                return "vous avez gagné avec un temps de "+(d.getTempsDefier()/100)+"s";
             }
         }
         return "erreur";

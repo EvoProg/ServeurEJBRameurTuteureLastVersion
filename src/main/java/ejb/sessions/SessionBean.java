@@ -209,7 +209,6 @@ public class SessionBean implements SessionBeanLocal{
         }
     }
 
-    @PostConstruct
     public void deleteAllRameur(){
         List<Rameur> lr = this.getListeRameurs();
         for(int i = 0 ; i< lr.size();i++){

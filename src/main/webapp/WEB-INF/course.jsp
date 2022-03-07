@@ -86,9 +86,19 @@
                         <button id="bouton-maj-adversaires">Rafraîchir</button>
                     </form>
                     <form action="CourseControleur" method="post">
-                        <button id="bouton-conseil-adversaires">Conseil</button>
-                    </form>
 
+                    <fieldset>
+                        <button id="bouton-conseil-adversaires">Conseil</button>
+                        <legend>Liste des adversaires conseillés:</legend>
+                        <ul>
+                            <c:forEach items="${utilisateurs}" var="util">
+                                <li>
+                                    <p>${util}</p>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </fieldset>
+                    </form>
 
                     <fieldset>
                         <legend>Liste des adversaires disponibles:</legend>

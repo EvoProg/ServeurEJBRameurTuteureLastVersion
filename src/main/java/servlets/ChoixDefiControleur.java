@@ -53,6 +53,8 @@ public class ChoixDefiControleur extends HttpServlet
         Defis defi = cb.getDefi(idDefieur, idDefie);
         cb.lancerCourse(defi, idRameur);
 
+        session.setAttribute("defi", defi);
+
         while(!defi.isAccepte()){
             try {
                 Thread.sleep(1000);
@@ -63,7 +65,7 @@ public class ChoixDefiControleur extends HttpServlet
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/animation.jsp").forward(request,response);
 
-        while(sb.getRameur(idRameur).getValeur() != 0)
+        /*while(sb.getRameur(idRameur).getValeur() != 0)
         {
             try {
                 Thread.sleep(1000);
@@ -89,7 +91,7 @@ public class ChoixDefiControleur extends HttpServlet
         {
             System.out.println("résultat vide");
         }
-        request.setAttribute("resultat", res);
+        request.setAttribute("resultat", res);*/
 
         /*
         HttpSession session = request.getSession();
@@ -140,7 +142,8 @@ public class ChoixDefiControleur extends HttpServlet
 
 
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
+        //
+        // this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
     }
 
 

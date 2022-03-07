@@ -2,6 +2,7 @@ package stats;
 
 import ejb.entities.Performance;
 import ejb.entities.Utilisateur;
+import ejb.sessions.CourseBean;
 import ejb.sessions.ManagerBean;
 import ejb.sessions.ManagerBeanLocal;
 
@@ -56,18 +57,25 @@ public class SimilarCos {
 
     public double[] initVecteur(List<Performance> perfs){
         double[] vecteur = new double[3];
+        int j = 0;
 
         if(perfs != null && perfs.size() != 0){
             vecteur[0] = perfs.get(0).getPuissanceW();
             vecteur[1] = perfs.get(0).getDistanceCm();
             vecteur[2] = perfs.get(0).getTempsCs();
+            j++;
         }
 
         for (int i = 0; i < perfs.size(); i++) {
             vecteur[0] += perfs.get(i).getPuissanceW();
             vecteur[1] += perfs.get(i).getDistanceCm();
             vecteur[2] += perfs.get(i).getTempsCs();
+            j++;
         }
+
+        vecteur[0] = vecteur[0]/j;
+        vecteur[1] = vecteur[1]/j;
+        vecteur[2] = vecteur[2]/j;
 
         return vecteur;
     }
@@ -96,8 +104,11 @@ public class SimilarCos {
 
         double res = prodscal/(normeVecA * normeVecB);
 
+        //System.out.println(res);
+
         if(res >= 0.5 && res <= 1){
-            System.out.println(res);
+            //System.out.println(res);
+            //System.out.println(id);
             this.listeUserConseil.add(id);
         }
     }

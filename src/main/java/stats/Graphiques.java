@@ -101,7 +101,7 @@ public class Graphiques {
         DefaultCategoryDataset dataset = createDatasetDistances();
         //Mise en place des labels et du graphe sous la forme d'un histogramme horizontal
         //On enregistre le graphe sous la forme d'une image puis on l'envoie à la ServletReponse passée en paramètre
-        JFreeChart graph = ChartFactory.createBarChart("Distances parcourues durant les cinq dernières sessions", "","Distances parcourues (en dcm)", dataset, PlotOrientation.HORIZONTAL, true, true, false);
+        JFreeChart graph = ChartFactory.createBarChart("Distances parcourues durant les cinq dernières sessions", "","Distances parcourues (en dm)", dataset, PlotOrientation.HORIZONTAL, true, true, false);
         ServletOutputStream out = response.getOutputStream();
         response.setContentType("image/png");
         ChartUtilities.writeChartAsPNG(out, graph, 700, 500);

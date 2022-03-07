@@ -2,6 +2,8 @@ package ejb.sessions;
 
 import ejb.entities.Rameur;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Local;
 import java.util.List;
 
@@ -30,4 +32,8 @@ public interface SessionBeanLocal {
     public int getDernierIdRameur();
 
     public void deleteRameur(String idRameur);
+
+    //TODO vérifier si cela fonctionne bien dans le temps
+    @PostConstruct
+    public void deleteAllRameur();
 }

@@ -16,6 +16,8 @@ package ejb.sessions;
 import ejb.entities.Performance;
 import ejb.entities.Rameur;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -204,6 +206,14 @@ public class SessionBean implements SessionBeanLocal{
                 em.getTransaction().commit();
             else
                 em.getTransaction().rollback();
+        }
+    }
+
+    @PostConstruct
+    public void deleteAllRameur(){
+        List<Rameur> lr = this.getListeRameurs();
+        for(int i = 0 ; i< lr.size();i++){
+            deleteRameur(lr.get(i).getId()+"");
         }
     }
 }

@@ -60,6 +60,9 @@ public class ChoixDefiControleur extends HttpServlet
                 e.printStackTrace();
             }
         }
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/animation.jsp").forward(request,response);
+
         while(sb.getRameur(idRameur).getValeur() != 0)
         {
             try {

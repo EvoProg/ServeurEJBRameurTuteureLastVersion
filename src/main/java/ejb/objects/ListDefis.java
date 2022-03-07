@@ -2,14 +2,17 @@ package ejb.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 //TODO: ajouter un sémaphore sur la classe ?
 public class ListDefis {
     private static ListDefis instance;
     List<Defis> ld;
     List<Integer> lud;
+    private Semaphore semaphoreUtilisateurs;
+    private  Semaphore semaphoreDefis;
 
-    public static ListDefis getInstance(){
+    public synchronized static ListDefis getInstance(){
         if(instance == null){
             instance = new ListDefis();
         }
@@ -17,31 +20,67 @@ public class ListDefis {
     }
 
     private ListDefis(){
+        //Semaphore à 1 jeton pour gérer l'accès aux utilisateurs
+        semaphoreUtilisateurs = new Semaphore(1);
+        //Semaphore à 1 jeton pour gérer l'accès aux défis
+        semaphoreDefis = new Semaphore(1);
+
         ld = new ArrayList<>();
         lud = new ArrayList<>();
     }
 
-    public synchronized void addDefis(Defis d){
+    public void addDefis(Defis d){
+        try {
+            semaphoreDefis.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ld.add(d);
         System.out.println("dans list defis: "+ld.size());
+
+        semaphoreDefis.release();
     }
 
-    public synchronized void addUtil(int id)
+    public void addUtil(int id)
     {
+        try {
+            semaphoreUtilisateurs.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //Si l'id n'est pas déjà dans la liste
         if(!lud.contains(id))
             lud.add(id);
+
+
+        semaphoreUtilisateurs.release();
     }
 
-    public synchronized void supprUtil(int id){
+    public void supprUtil(int id){
+        try {
+            semaphoreUtilisateurs.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         lud.remove((Integer) id);
+
+        semaphoreUtilisateurs.release();
     }
 
-    public synchronized List<Integer> getUtil(){
+    public List<Integer> getUtil(){
         return lud;
     }
 
-    public synchronized List<Defis> getDefis(int idUtil){
+    public List<Defis> getDefis(int idUtil){
+        try {
+            semaphoreDefis.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List<Defis> ldt = new ArrayList<>();
         for(int i = 0;i<ld.size();i++){
             if(ld.get(i).getIdUtilDefier()==idUtil)
@@ -49,6 +88,9 @@ public class ListDefis {
                 ldt.add(ld.get(i));
             }
         }
+
+        semaphoreDefis.release();
+
         return ldt;
     }
 
@@ -65,7 +107,15 @@ public class ListDefis {
         }
     }
 
-    public synchronized void supprDefis(Defis d){
+    public void supprDefis(Defis d){
+        try {
+            semaphoreDefis.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ld.remove(d);
+
+        semaphoreDefis.release();
     }
 }

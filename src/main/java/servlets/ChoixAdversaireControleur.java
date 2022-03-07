@@ -61,6 +61,9 @@ public class ChoixAdversaireControleur extends HttpServlet
                 e.printStackTrace();
             }
         }
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/animation.jsp").forward(request,response);
+
         while(sb.getRameur(idRameurChoisi).getValeur() != 0)
         {
             try {

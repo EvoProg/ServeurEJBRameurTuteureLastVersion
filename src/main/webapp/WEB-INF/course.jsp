@@ -134,7 +134,7 @@
                                         <c:forEach items="${defis}" var="defi">
                                             <li>
                                                 <!--TODO: ajouter une méthode dans Defi pour récupérer directement un utilisateur et pas seulement son ID-->
-                                                <input type="radio" id="radio-choix-defi${defi.getIdUtilDefieur()}" name="radio-choix-defi" value="${defi.getIdUtilDefieur},${defi.getIdUtilDefier}" required>
+                                                <input type="radio" id="radio-choix-defi${defi.getIdUtilDefieur()}" name="radio-choix-defi" value="${defi.getIdUtilDefieur()},${defi.getIdUtilDefier()}" required>
                                                 <label for="radio-choix-defi${defi.getIdUtilDefieur()}">${defi.getIdUtilDefieur()} : ${defi.getDistanceCourse()}m</label>
                                             </li>
                                         </c:forEach>

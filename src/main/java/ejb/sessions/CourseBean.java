@@ -58,6 +58,7 @@ public class CourseBean {
 
     public void lancerCourse(Defis d, int idRameur){
         d.setIdRameurDefier(idRameur);
+        d.setAccepte(true);
         sb.updateRameur(
                 d.getIdRameurDefier(),
                 "distance",
@@ -71,7 +72,7 @@ public class CourseBean {
                 d.getIdRameurDefieur(),
                 "distance",
                 d.getDistanceCourse(),
-                d.getIdRameurDefieur(),
+                d.getIdUtilDefieur(),
                 mb.getDerniereSession(d.getIdUtilDefieur())+1,
                 0,
                 0
@@ -93,20 +94,27 @@ public class CourseBean {
     }
 
     public String resultatCourse(Defis d, int idutil){
+        System.out.println("idUtil" + idutil);
+        System.out.println("idDefier " + d.getIdUtilDefier());
+        System.out.println("idDefieur " + d.getIdUtilDefieur());
+        System.out.println("temps Defier " + d.getTempsDefier());
+        System.out.println("temps Defier " + d.getTempsDefieur());
         if(idutil == d.getIdUtilDefieur()){
-            if(d.getTempsDefier()>d.getTempsDefieur()){
-                return "vous avez perdu";
+            System.out.println("je suis dans le Defieur");
+            if(d.getTempsDefier()<d.getTempsDefieur()){
+                return "vous avez perdu "+d.getTempsDefieur();
             }
             else{
-                return "vous avez gagné";
+                return "vous avez gagné "+d.getTempsDefieur();
             }
         }
-        if(idutil == d.getIdRameurDefier()){
-            if(d.getTempsDefieur()>d.getTempsDefier()){
-                return "vous avez perdu";
+        if(idutil == d.getIdUtilDefier()){
+            System.out.println("je suis dans le Defier");
+            if(d.getTempsDefieur()<d.getTempsDefier()){
+                return "vous avez perdu "+d.getTempsDefier();
             }
             else{
-                return "vous avez gagné";
+                return "vous avez gagné "+d.getTempsDefier();
             }
         }
         return "erreur";
@@ -114,6 +122,6 @@ public class CourseBean {
 
     public Defis getDefi(int idDefieur, int idDefie)
     {
-        return ld.getDefi(idDefieur, idDefieur);
+        return ld.getDefi(idDefieur, idDefie);
     }
 }

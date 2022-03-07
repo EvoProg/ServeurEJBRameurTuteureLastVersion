@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,8 +23,9 @@
     <br>
 
     <section class="options">
-        <p>Défi envoyé : attente de l'adversaire...</p>
+        <p>${resultat}</p>
     </section>
+
 
 </body>
 </html>

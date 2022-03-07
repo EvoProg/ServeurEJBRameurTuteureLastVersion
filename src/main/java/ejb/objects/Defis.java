@@ -10,6 +10,7 @@ public class Defis implements Serializable {
     private int tempsDefier;
     private int idRameurDefieur;
     private int idRameurDefier;
+    private boolean accepte;
 
     public Defis(int idUtilDefieur, int idUtilDefier, int distanceCourse, int idRameurDefieur) {
         this.idUtilDefieur = idUtilDefieur;
@@ -74,5 +75,13 @@ public class Defis implements Serializable {
 
     public void setDistanceCourse(int distanceCourse) {
         this.distanceCourse = distanceCourse;
+    }
+
+    public boolean isAccepte() {
+        return accepte;
+    }
+
+    public void setAccepte(boolean accepte) {
+        this.accepte = accepte;
     }
 }

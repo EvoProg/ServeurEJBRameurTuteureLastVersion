@@ -9,6 +9,7 @@ package rest;
 
 
 import ejb.entities.Rameur;
+import ejb.sessions.SessionBean;
 import ejb.sessions.SessionBeanLocal;
 import org.json.simple.JSONObject;
 
@@ -18,18 +19,19 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
+@Stateless
 @Path("/ressource")
 public class RameurRessource {
     //Déclaration des variables
     //Appel de l'EJB depuis son interface
     @EJB
-    private SessionBeanLocal sb;
+    private SessionBeanLocal sb = new SessionBean();
 
     //Méthode permettant de set l'identifiant d'un rameur
     @Path("/identifiant")
     @GET
     @Produces("text/plain")
-    public synchronized String getIdentifiantRameur(){
+    public String getIdentifiantRameur(){
         String identifiant = "";
         int id = sb.getDernierIdRameur();
         identifiant += id;
@@ -41,7 +43,7 @@ public class RameurRessource {
     @Path("/ajoutRameur")
     @PUT
     @Produces("text/plain")
-    public synchronized void addRameur(String idRameur){
+    public void addRameur(String idRameur){
         //Variables
         int identifiantRameur, valeurRameur;
 
@@ -57,7 +59,7 @@ public class RameurRessource {
     @Path("/type")
     @PUT
     @Produces("text/plain")
-    public synchronized String getRameurSessionType(String idRameur) {
+    public String getRameurSessionType(String idRameur) {
         //Variables
         int identifiantRameur = Integer.parseInt(idRameur);;
         String type = "";
@@ -71,7 +73,7 @@ public class RameurRessource {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         //System.out.println("Sortie de la boucle getRameurSessionType");
@@ -83,7 +85,7 @@ public class RameurRessource {
     @Path("/valeur")
     @PUT
     @Produces("text/plain")
-    public synchronized String getRameurSessionValeur(String idRameur) {
+    public String getRameurSessionValeur(String idRameur) {
         //Variables
         String valeur = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -99,7 +101,7 @@ public class RameurRessource {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -114,7 +116,7 @@ public class RameurRessource {
     @Path("/repos")
     @PUT
     @Produces("text/plain")
-    public synchronized String getRameurSessionRepos(String idRameur) {
+    public String getRameurSessionRepos(String idRameur) {
         //Variables
         String repos = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -130,7 +132,7 @@ public class RameurRessource {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -145,7 +147,7 @@ public class RameurRessource {
     @Path("/repetition")
     @PUT
     @Produces("text/plain")
-    public synchronized String getRameurSessionRepetition(String idRameur) {
+    public String getRameurSessionRepetition(String idRameur) {
         //Variables
         String repetition = "";
         int identifiantRameur = Integer.parseInt(idRameur);
@@ -161,7 +163,7 @@ public class RameurRessource {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -174,7 +176,7 @@ public class RameurRessource {
 
     @DELETE
     @Consumes("text/plain")
-    public synchronized void deleteRameur(String id){
+    public void deleteRameur(String id){
         sb.deleteRameur(id);
     }
 }

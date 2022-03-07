@@ -1,7 +1,11 @@
 package servlets;
 
+import ejb.entities.Performance;
+import ejb.entities.Rameur;
+import ejb.entities.Utilisateur;
 import ejb.objects.Defis;
 import ejb.sessions.CourseBean;
+import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
@@ -12,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ChoixDefiControleur", value = "/choixDefi")
 public class ChoixDefiControleur extends HttpServlet
@@ -21,6 +27,9 @@ public class ChoixDefiControleur extends HttpServlet
 
     @EJB
     private CourseBean cb;
+
+    @EJB
+    private ManagerBeanLocal mb;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -42,10 +51,42 @@ public class ChoixDefiControleur extends HttpServlet
         int idDefie = Integer.parseInt(ids[1]);
 
         Defis defi = cb.getDefi(idDefieur, idDefie);
-
-        System.out.println(idDefieur + "==============" + idDefie);
         cb.lancerCourse(defi, idRameur);
 
+        while(!defi.isAccepte()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while(sb.getRameur(idRameur).getValeur() != 0)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
+        int idUtil = utilisateur.getId();
+        System.out.println("idUtil" + idUtil);
+        System.out.println("idDefier " + defi.getIdUtilDefier());
+        System.out.println("idDefieur " + defi.getIdUtilDefieur());
+        List<Performance> performances = mb.getListeDernieresPerformances(idUtil);
+        System.out.println("temps " + performances.get(performances.size()-1).getTempsCs());
+        String res = "";
+        try {
+            res = cb.ajoutTempsEtAfficheResultat(performances.get(performances.size()-1).getTempsCs(), defi, idUtil);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(res.equals(""))
+        {
+            System.out.println("résultat vide");
+        }
+        request.setAttribute("resultat", res);
 
         /*
         HttpSession session = request.getSession();
@@ -96,7 +137,7 @@ public class ChoixDefiControleur extends HttpServlet
 
 
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/testCourse.jsp").forward(request, response);
     }
 
 

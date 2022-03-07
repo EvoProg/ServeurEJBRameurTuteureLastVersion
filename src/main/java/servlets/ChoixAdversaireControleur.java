@@ -1,7 +1,12 @@
 package servlets;
 
+import ejb.entities.Performance;
+import ejb.entities.Rameur;
 import ejb.entities.Utilisateur;
+import ejb.objects.Defis;
 import ejb.sessions.CourseBean;
+import ejb.sessions.ManagerBeanLocal;
+import ejb.sessions.ManagerBeanLocal;
 import ejb.sessions.SessionBeanLocal;
 
 import javax.ejb.EJB;
@@ -12,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ChoixAdversaireControleur", value = "/choixAdversaire")
 public class ChoixAdversaireControleur extends HttpServlet
@@ -21,6 +27,9 @@ public class ChoixAdversaireControleur extends HttpServlet
 
     @EJB
     private CourseBean cb;
+
+    @EJB
+    private ManagerBeanLocal mb;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -43,6 +52,38 @@ public class ChoixAdversaireControleur extends HttpServlet
         int distance = Integer.parseInt(request.getParameter("inputDistance"));
         int idRameurChoisi = (Integer)session.getAttribute("rameurChoisi");
         cb.lancerDefis(idUtilisateur, idAdversaire, distance, idRameurChoisi);
+        Defis defi = cb.getDefi(idUtilisateur, idAdversaire);
+
+        while(!defi.isAccepte()){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while(sb.getRameur(idRameurChoisi).getValeur() != 0)
+        {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<Performance> performances = mb.getListeDernieresPerformances(idUtilisateur);
+
+
+        String res = "";
+        try {
+            res = cb.ajoutTempsEtAfficheResultat(performances.get(performances.size()-1).getTempsCs(), defi, idUtilisateur);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if(res.equals(""))
+        {
+            System.out.println("résultat vide");
+        }
+        request.setAttribute("resultat", res);
 
         //Récupération de la liste des utilisateurs disponibles pour une course
         /*List<Utilisateur> utilisateursDispos = cb.getUtilisateursDispos();

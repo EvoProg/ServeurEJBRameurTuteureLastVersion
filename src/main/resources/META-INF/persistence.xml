@@ -11,12 +11,10 @@
         <class>ejb.entities.PerformanceId</class>
         <class>ejb.entities.Performance</class>
         <class>ejb.entities.Rameur</class>
-        <class>ejb.entities.Rameur</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
             <property name="hibernate.hbm2ddl.create" value="update"/>
         </properties>
-
     </persistence-unit>
 </persistence>

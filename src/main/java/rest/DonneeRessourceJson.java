@@ -2,6 +2,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ejb.entities.Performance;
+import ejb.sessions.ManagerBean;
 import ejb.sessions.ManagerBeanLocal;
 import org.json.simple.JSONObject;
 
@@ -16,16 +17,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
 
+@Stateless
 @Path("/donneeJson")
 public class DonneeRessourceJson{
     @EJB
-    private ManagerBeanLocal mg;
+    private ManagerBeanLocal mg = new ManagerBean();
 
     @Path("/puissance")
     @PUT
     @Consumes("text/plain")
     @Produces("text/plain")
-    public synchronized void putDonnee(String jo){
+    public void putDonnee(String jo){
         //System.out.println(jo);
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();

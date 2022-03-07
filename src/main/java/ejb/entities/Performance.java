@@ -23,7 +23,7 @@ public class Performance implements Serializable {
     @EmbeddedId
     private PerformanceId id;
 
-    @Column(name="id_Rameur")
+    @Column(name="idRameur")
     private Integer idRameur;
 
     @Column(name = "temps_cs")

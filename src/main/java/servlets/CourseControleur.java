@@ -5,6 +5,7 @@ import ejb.entities.Utilisateur;
 import ejb.objects.Defis;
 import ejb.sessions.CourseBean;
 import ejb.sessions.SessionBeanLocal;
+import stats.SimilarCos;
 
 import javax.ejb.EJB;
 import javax.servlet.*;
@@ -78,6 +79,12 @@ public class CourseControleur extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        HttpSession session = request.getSession();
+        Utilisateur utilisateur = (Utilisateur)session.getAttribute("Utilisateur");
+        int idUtil = utilisateur.getId();
+        SimilarCos conseil = new SimilarCos(idUtil);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/course.jsp").forward(request, response);
+
         /*int Distance = Integer.parseInt(request.getParameter("Distance"));
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
         cb.init(utilisateur.getId());

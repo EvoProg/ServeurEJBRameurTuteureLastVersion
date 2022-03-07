@@ -85,6 +85,9 @@
                     <form action="CourseControleur" method="get">
                         <button id="bouton-maj-adversaires">Rafraîchir</button>
                     </form>
+                    <form action="CourseControleur" method="post">
+                        <button id="bouton-conseil-adversaires">Conseil</button>
+                    </form>
 
 
                     <fieldset>

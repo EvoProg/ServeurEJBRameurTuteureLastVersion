@@ -21,6 +21,8 @@ public interface ManagerBeanLocal {
 
     //Méthode pour récupérer un Utilisateur
     public Utilisateur getUtilisateur(int idUtil);
+    //Pour récupérer tout les utilisateurs
+    public List<Utilisateur> getListeUtilisateurs();
 
     //Méthode permettant de rechercher la dernière session effectuer par un Utilisateur
     public int getDerniereSession(int idUtil);

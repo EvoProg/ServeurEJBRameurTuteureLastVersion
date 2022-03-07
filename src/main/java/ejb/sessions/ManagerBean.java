@@ -164,6 +164,23 @@ public class ManagerBean implements ManagerBeanLocal{
         return utilisateur;
     }
 
+    @Override
+    public List<Utilisateur> getListeUtilisateurs() {
+        //Variable renvoyée
+        List<Utilisateur> utilisateurs = null;
+
+        //Récupération des performances depuis la BD
+        Query q = em.createNamedQuery("utilisateurs");
+        try{
+            utilisateurs = q.getResultList();
+        }catch (Exception e){
+            //Si les performances n'existent pas
+            //System.out.println("Erreur dans getListeToutePerformances connection BD : "+e.getMessage());
+        }
+
+        return utilisateurs;
+    }
+
     //Méthode permettant de rechercher la dernière session effectuer par un Utilisateur
     @Override
     public synchronized int getDerniereSession(int idUtil) {

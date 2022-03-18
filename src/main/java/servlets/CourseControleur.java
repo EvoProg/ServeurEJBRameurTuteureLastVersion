@@ -100,10 +100,5 @@ public class CourseControleur extends HttpServlet
         }
         request.setAttribute("utilisateurs",utils);
         this.doGet(request, response);
-
-        /*int Distance = Integer.parseInt(request.getParameter("Distance"));
-        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("Utilisateur");
-        cb.init(utilisateur.getId());
-        cb.lancerDefis(Distance,0);*/
     }
 }

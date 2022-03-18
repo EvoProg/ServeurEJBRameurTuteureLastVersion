@@ -5,13 +5,13 @@ import java.io.Serializable;
 
 /*
     EJB permettent de représenter et de gérer des données enregistrées dans une base de données.
-    En l'occurence ici, EJB représentant la table "rameurs".
+    En l'occurrence ici, EJB représentant la table "rameurs".
  */
 
 @Entity
 /*Requête sur la table*/
 @NamedQueries({
-        @NamedQuery(name = "rameurs", query = "select r from Rameur r"),  //Liste de touts les Rameurs
+        @NamedQuery(name = "rameurs", query = "select r from Rameur r"),  //Liste de tous les rameurs
         @NamedQuery(name = "rameur_id", query = "select r from Rameur r where r.id = :idRameur"), //Rameur selon un identifiant
         @NamedQuery(name = "rameurs_valeur", query = "select r from Rameur r where r.valeur = :valeur") //Liste des rameurs selon leurs valeurs
 })

@@ -1,9 +1,9 @@
 package ejb.sessions;
 
 /*
-    ’EJB session stateless (sans état conversationnel) représente des traitements de l’application indépendants de
+    EJB session stateless (sans état conversationnel) représente des traitements de l’application indépendants de
     l’état entre le client et le serveur. N’importe quel utilisateur peut avoir recours à un EJB stateless et donc,
-    il ne faut pas stocker dans un EJB stateless d’information liée à la requête où à la session d’un utilisateur.
+    il ne faut pas stocker dans un EJB stateless d’information liée à la requête ou à la session d’un utilisateur.
     On retrouve ainsi les mêmes restrictions que pour le développement de Servlet. Néanmoins, les EJB stateless
     fournissent un modèle d’exécution concurrent (threading model) sûr. En effet, le conteneur d’EJB crée un pool
     d’instances pour chaque classe d’EJB stateless. Ainsi à un instant T, toutes les requêtes qui s’exécutent en

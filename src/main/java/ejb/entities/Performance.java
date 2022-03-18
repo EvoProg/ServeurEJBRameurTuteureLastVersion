@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /*
     EJB permettent de représenter et de gérer des données enregistrées dans une base de données.
-    En l'occurence ici, EJB représentant la table "performances".
+    En l'occurrence ici, EJB représentant la table "performances".
  */
 
 @Entity
